@@ -44,6 +44,7 @@ import java.util.*;
  *
  * @author J Boyd Trolinger
  * @author Eric Weesner
+ * @author Sean Worthington
  * @version 1.1
  */
 public class KeyboardReader
