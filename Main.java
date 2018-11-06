@@ -3,7 +3,7 @@
  * Main is a main method that allows users to decide which test they would 
  *Like to run. 
  * @author Sean H. Worthington
- * @author 
+ * @author your name here
  * @version 1.1
  */
 
