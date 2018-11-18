@@ -30,7 +30,8 @@ public class Main {
     
     public static int getCommand(){
         //List all commands
-        String commands[] = {"Quit Tester","Test Echoer","next command here"};
+        String commands[] = {"Quit Tester","Test Echoer","test backuper","Test Pay-Forward","Test ShowCoins","Test Depositer","Test Minder",
+        		"Test Emailer","Test Vaulter","Test LossFixer","Test Grader","Test Translator"};
         
         System.out.println("Enter the number of the command you wish to execute");
         for(int i= 0; i < commands.length; i++)
@@ -55,11 +56,58 @@ public class Main {
             case 1: 
             //Execute Test Echoer
                System.out.println("Testing Echoer");
+               
             break;
             case 2: 
-            //Execute Quit Program
-                System.out.println("Could run other commands.");
+            //test back upper
+                System.out.println("Testing BackUpper");
+                
             break;
+            case 3: 
+                //test  PayForward
+                    System.out.println("Testing PayForward.");
+                    
+                break;
+            case 4: 
+                //test  ShowCoins
+                    System.out.println("Testing ShowCoins.");
+                    
+                break;
+            case 5: 
+                //test Depositer
+                    System.out.println("Testing Depositer.");
+                    
+                break;
+            case 6: 
+                //test Minder
+                    System.out.println("Testing Minder.");
+                    
+                break;
+            case 7: 
+                //test Emailer
+                    System.out.println("Testing Emailer.");
+                    
+                break;
+            case 8: 
+                //test Vaulter
+                    System.out.println("Testing Vaulter.");
+               
+               break;
+            case 9: 
+                //test LossFixer
+                    System.out.println("Testing LossFixer.");
+               
+               break;
+            case 10: 
+                //test Grader
+                    System.out.println("Testing Grader.");
+               
+                break;
+            case 11: 
+                //test Translator
+                    System.out.println("Testing Translator");
+                    
+                break;
             default: 
                System.out.println("Error running command. Please try again. ");
             break;
