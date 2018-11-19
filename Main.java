@@ -107,8 +107,8 @@ public class Main {
                break;
             case 11:
                 //test Grader
-                    System.out.println("Testing Grader.");
-               
+                System.out.println("Testing Grader.");
+                new Grader();
                 break;
             case 12:
                 //test Translator
