@@ -9,7 +9,7 @@
 
 public class Main {
 
-    
+    public static String RootPath = "C:\\CloudCoinServer\\accounts\\default_account_password\\";
     
     public static void main(String[] args) {
         greet();
@@ -58,52 +58,59 @@ public class Main {
                System.out.println("Testing Echoer");
                
             break;
-            case 2: 
-            //test back upper
+            case 2:
+                //test  Exporter
+                System.out.println("Testing Exporter");
+                new Exporter();
+                break;
+            case 3:
+                //Execute Quit Program
+                System.out.println("Could run other commands.");
+                //test back upper
                 System.out.println("Testing BackUpper");
                 
             break;
-            case 3: 
+            case 4:
                 //test  PayForward
                     System.out.println("Testing PayForward.");
                     
                 break;
-            case 4: 
+            case 5:
                 //test  ShowCoins
                     System.out.println("Testing ShowCoins.");
                     
                 break;
-            case 5: 
+            case 6:
                 //test Depositer
                     System.out.println("Testing Depositer.");
                     
                 break;
-            case 6: 
+            case 7:
                 //test Minder
                     System.out.println("Testing Minder.");
                     
                 break;
-            case 7: 
+            case 8:
                 //test Emailer
                     System.out.println("Testing Emailer.");
                     
                 break;
-            case 8: 
+            case 9:
                 //test Vaulter
                     System.out.println("Testing Vaulter.");
                
                break;
-            case 9: 
+            case 10:
                 //test LossFixer
                     System.out.println("Testing LossFixer.");
                
                break;
-            case 10: 
+            case 11:
                 //test Grader
                     System.out.println("Testing Grader.");
                
                 break;
-            case 11: 
+            case 12:
                 //test Translator
                     System.out.println("Testing Translator");
                     
