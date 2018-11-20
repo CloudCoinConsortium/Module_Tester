@@ -43,7 +43,7 @@ public class Backupper {
     public static final String TAG_PASSWORDS = "Passwords";
 
 //    public static final String RootPath = Paths.get("").toAbsolutePath().toString() + File.separator;
-    public static String RootPath = "/Users/mustanseriqbal/Desktop/Mustanser/";
+    public static String RootPath = Main.RootPath;
 
     public static String CommandFolder = RootPath + TAG_CLOUD_COIN + File.separator + TAG_COMMAND + File.separator;
     public static String LogsFolder = RootPath + TAG_CLOUD_COIN + File.separator + TAG_LOGS + File.separator
