@@ -68,6 +68,7 @@ public class Main {
                 System.out.println("Could run other commands.");
                 //test back upper
                 System.out.println("Testing BackUpper");
+				new Backupper();
                 
             break;
             case 4:
