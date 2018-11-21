@@ -1,3 +1,4 @@
+package com.cloudcoin.moduletester;
 
 /**
  * Main is a main method that allows users to decide which test they would 
@@ -9,7 +10,7 @@
 
 public class Main {
 
-    public static String RootPath = "C:\\CloudCoinServer\\accounts\\default_account_password\\";
+    public static String RootPath = "C:\\CloudCoinServer\\accounts\\DefaultUser\\";
     
     public static void main(String[] args) {
         greet();
@@ -31,8 +32,8 @@ public class Main {
     public static int getCommand(){
         //List all commands
         String commands[] = {"Quit Tester","Test Echoer","Test Exporter","test backuper","Test Pay-Forward","Test ShowCoins","Test Depositer","Test Minder",
-        		"Test Emailer","Test Vaulter","Test LossFixer","Test Grader","Test Translator","Test Unpacker","Test Authenticator"};
-        
+                "Test Emailer","Test Vaulter","Test LossFixer","Test Grader","Test Translator","Test Unpacker","Test Authenticator"};
+
         System.out.println("Enter the number of the command you wish to execute");
         for(int i= 0; i < commands.length; i++)
         {
@@ -45,7 +46,6 @@ public class Main {
     }
 
     public static void executeCommand(int commandNumber ){
-        
         switch(commandNumber)
         {
             case 0: 
@@ -53,10 +53,11 @@ public class Main {
                 System.out.println("Quiting.");
                 System.exit(0);
             break;
+
             case 1: 
             //Execute Test Echoer
                System.out.println("Testing Echoer");
-               
+
             break;
             case 2:
                 //test  Exporter
@@ -68,44 +69,43 @@ public class Main {
                 System.out.println("Could run other commands.");
                 //test back upper
                 System.out.println("Testing BackUpper");
-				new Backupper();
-                
-            break;
+                new Backupper();
+                break;
             case 4:
                 //test  PayForward
-                    System.out.println("Testing PayForward.");
-                    
+                System.out.println("Testing PayForward.");
+
                 break;
             case 5:
                 //test  ShowCoins
-                    System.out.println("Testing ShowCoins.");
-                    
+                System.out.println("Testing ShowCoins.");
+
                 break;
             case 6:
                 //test Depositer
-                    System.out.println("Testing Depositer.");
-                    
+                System.out.println("Testing Depositer.");
+
                 break;
             case 7:
                 //test Minder
-                    System.out.println("Testing Minder.");
-                    
+                System.out.println("Testing Minder.");
+
                 break;
             case 8:
                 //test Emailer
-                    System.out.println("Testing Emailer.");
-                    
+                System.out.println("Testing Emailer.");
+
                 break;
             case 9:
                 //test Vaulter
-                    System.out.println("Testing Vaulter.");
-               
-               break;
+                System.out.println("Testing Vaulter.");
+
+                break;
             case 10:
                 //test LossFixer
-                    System.out.println("Testing LossFixer.");
-               
-               break;
+                System.out.println("Testing LossFixer.");
+
+                break;
             case 11:
                 //test Grader
                 System.out.println("Testing Grader.");
@@ -113,8 +113,8 @@ public class Main {
                 break;
             case 12:
                 //test Translator
-                    System.out.println("Testing Translator");
-                    
+                System.out.println("Testing Translator");
+
                 break;
             case 13:
                 //test Translator
@@ -126,13 +126,11 @@ public class Main {
                 System.out.println("Testing Authenticator");
                 new Authenticator();
                 break;
-            default: 
-               System.out.println("Error running command. Please try again. ");
-            break;
+            default:
+                System.out.println("Error running command. Please try again. ");
         }//end switch
-        
+
         //end execute Command
     }//end execute Command
-    
 }//end Main
 

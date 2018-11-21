@@ -1,3 +1,4 @@
+package com.cloudcoin.moduletester;
 /*
 Copyright (c) 2010, J Boyd Trolinger and Eric Weesner
 

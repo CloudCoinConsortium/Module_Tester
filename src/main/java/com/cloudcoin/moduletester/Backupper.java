@@ -1,7 +1,5 @@
-package com.cloudcore.exporter;
+package com.cloudcoin.moduletester;
 
-import com.cloudcore.exporter.core.*;
-import com.cloudcore.exporter.utils.FileUtils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -155,7 +153,7 @@ public class Backupper {
                 copyFiles(new File(GalleryFolder), new File(backupFolder));
                 System.out.println("Backup completed");
             } catch (JSONException ex) {
-                Logger.getLogger(FileUtils.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger("Backupper").log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -347,7 +345,7 @@ public class Backupper {
             if (null != filenames) {
                 for (File file : filenames) {
                     if (file.isFile()) {
-                        if (file.getName().contains(Config.TAG_file_name)) {
+                        if (file.getName().contains(".stack")) {
                             commandFile = readCommandFile(file.getAbsolutePath());
                             break;
                         }

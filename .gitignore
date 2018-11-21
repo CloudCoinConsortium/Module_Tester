@@ -1,2 +1,6 @@
+build/
+out/
+gradle/
 .idea/
-output/
+.gradle/
+classes/

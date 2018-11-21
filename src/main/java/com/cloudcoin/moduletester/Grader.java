@@ -1,9 +1,16 @@
-public class Authenticator {
+package com.cloudcoin.moduletester;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Scanner;
+
+public class Grader {
 
     private static String RootPath = Main.RootPath;
 
 
-    public Authenticator() {
+    public Grader() {
         createDirectories();
 
         ShowCommandLineOutput();
@@ -22,7 +29,11 @@ public class Authenticator {
         try {
             Files.createDirectories(Paths.get(RootPath));
             Files.createDirectories(Paths.get(RootPath + "Detected\\"));
-            Files.createDirectories(Paths.get(RootPath + "Suspect\\"));
+            Files.createDirectories(Paths.get(RootPath + "Bank\\"));
+            Files.createDirectories(Paths.get(RootPath + "Fracked\\"));
+            Files.createDirectories(Paths.get(RootPath + "Counterfeit\\"));
+            Files.createDirectories(Paths.get(RootPath + "Lost\\"));
+            Files.createDirectories(Paths.get(RootPath + "Logs\\"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -34,10 +45,15 @@ public class Authenticator {
         while (true) {
             try {
                 System.out.println();
-                System.out.println("1. Authenticate 1 CloudCoin (Counterfeit)");
-                System.out.println("2. Authenticate 10 CloudCoins (Counterfeit)");
-                System.out.println("3. Authenticate 100 CloudCoins (Counterfeit)");
-                System.out.println("4. Authenticate 400 CloudCoins (Counterfeit)");
+                System.out.println("1. Grade 1 CloudCoin (Passing)");
+                System.out.println("2. Grade 1 CloudCoin (Fracked)");
+                System.out.println("3. Grade 1 CloudCoin (Counterfeit)");
+                System.out.println("4. Grade 1 CloudCoin (Lost)");
+                System.out.println("5. Grade 4 CloudCoins (one of each)");
+                System.out.println("6. Grade 10 CloudCoins (Passing)");
+                System.out.println("7. Grade 40 CloudCoins (ten of each)");
+                System.out.println("8. Grade 100 CloudCoins (Passing)");
+                System.out.println("9. Grade 400 CloudCoins (hundred of each)");
                 System.out.println("0. Exit");
 
                 reader.hasNext();
@@ -52,19 +68,50 @@ public class Authenticator {
 
                 switch (input) {
                     case "1":
-                        saveFile(makeCloudCoinCounterfeit(1), 1);
+                        saveFile(makeCloudCoinPassing(1), 1);
                         break;
                     case "2":
-                        for (int i = 0; i < 10; i++)
-                            saveFile(makeCloudCoinCounterfeit(1 + i), 1 + i);
+                        saveFile(makeCloudCoinFracked(1), 1);
                         break;
                     case "3":
-                        for (int i = 0; i < 100; i++)
-                            saveFile(makeCloudCoinCounterfeit(1 + i), 1 + i);
+                        saveFile(makeCloudCoinCounterfeit(1), 1);
                         break;
                     case "4":
-                        for (int i = 0; i < 1000; i++)
-                            saveFile(makeCloudCoinCounterfeit(1 + i), 1 + i);
+                        saveFile(makeCloudCoinLost(1), 1);
+                        break;
+                    case "5":
+                        saveFile(makeCloudCoinPassing(1), 1);
+                        saveFile(makeCloudCoinFracked(2), 2);
+                        saveFile(makeCloudCoinCounterfeit(3), 3);
+                        saveFile(makeCloudCoinLost(4), 4);
+                        break;
+                    case "6":
+                        for (int i = 0; i < 10; i++)
+                            saveFile(makeCloudCoinPassing(i), i);
+                        break;
+                    case "7":
+                        for (int i = 0; i < 10; i++)
+                            saveFile(makeCloudCoinPassing(i), i);
+                        for (int i = 0; i < 10; i++)
+                            saveFile(makeCloudCoinFracked(i), i);
+                        for (int i = 0; i < 10; i++)
+                            saveFile(makeCloudCoinCounterfeit(i), i);
+                        for (int i = 0; i < 10; i++)
+                            saveFile(makeCloudCoinLost(i), i);
+                        break;
+                    case "8":
+                        for (int i = 0; i < 100; i++)
+                            saveFile(makeCloudCoinPassing(i), i);
+                        break;
+                    case "9":
+                        for (int i = 0; i < 100; i++)
+                            saveFile(makeCloudCoinPassing(i), i);
+                        for (int i = 0; i < 100; i++)
+                            saveFile(makeCloudCoinFracked(i), i);
+                        for (int i = 0; i < 100; i++)
+                            saveFile(makeCloudCoinCounterfeit(i), i);
+                        for (int i = 0; i < 100; i++)
+                            saveFile(makeCloudCoinLost(i), i);
                         break;
                     case "0":
                         return;
@@ -78,10 +125,26 @@ public class Authenticator {
 
     public static void saveFile(byte[] cloudCoin, int sn) throws IOException {
         String filename = ensureFilenameUnique("1.CloudCoin.1.0000" + sn + ".e054a34f2790fd3353ea26e5d92d9d2f",".stack", RootPath + "Detected\\");
-        Files.write(Paths.get(RootPath + "Suspect\\" + filename), cloudCoin);
+        Files.write(Paths.get(RootPath + "Detected\\" + filename), cloudCoin);
+    }
+
+    public static byte[] makeCloudCoinPassing(int sn) {
+        return makeCloudCoin(sn, "ppppppppppppppppppppppppp");
+    }
+
+    public static byte[] makeCloudCoinFracked(int sn) {
+        return makeCloudCoin(sn, "ppppppppppppppppppppppppf");
     }
 
     public static byte[] makeCloudCoinCounterfeit(int sn) {
+        return makeCloudCoin(sn, "pppppppppppppppppppf");
+    }
+
+    public static byte[] makeCloudCoinLost(int sn) {
+        return makeCloudCoin(sn, "ppppppppppppppppppp");
+    }
+
+    public static byte[] makeCloudCoin(int sn, String pown) {
         return ("{\n" +
                 "  \"cloudcoin\": [\n" +
                 "    {\n" +
@@ -115,7 +178,7 @@ public class Authenticator {
                 "        \"00000000000000000000000000000000\"\n" +
                 "      ],\n" +
                 "      \"ed\": \"11-2020\",\n" +
-                "      \"pown\": \"fffffffffffffffffffffffff\",\n" +
+                "      \"pown\": \"" + pown + "\",\n" +
                 "      \"aoid\": []\n" +
                 "    }\n" +
                 "  ]\n" +

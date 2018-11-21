@@ -1,3 +1,13 @@
+package com.cloudcoin.moduletester;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
 public class Exporter {
 
     private static String RootPath = Main.RootPath;
@@ -52,8 +62,11 @@ public class Exporter {
                 System.out.println("0. Exit");
 
                 reader.hasNext();
-                String input = reader.next();
-                if (input == null) {
+                String input;
+                try {
+                    input = reader.next();
+                } catch (Exception e) {
+                    e.printStackTrace();
                     reader = new Scanner(System.in);
                     continue;
                 }
