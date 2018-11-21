@@ -35,7 +35,7 @@ public class Unpacker {
     }
 
     public static void ShowCommandLineOutput() {
-        Scanner reader = new Scanner(System.in);
+        KeyboardReader reader = new KeyboardReader();
 
         while (true) {
             try {
@@ -49,41 +49,33 @@ public class Unpacker {
                 System.out.println("7. Unpack CloudCoins (Multi Stack: 10000)");
                 System.out.println("0. Exit");
 
-                reader.hasNext();
-                String input;
-                try {
-                    input = reader.next();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    reader = new Scanner(System.in);
-                    continue;
-                }
+                int input = reader.readInt();
 
                 switch (input) {
-                    case "1":
+                    case 1:
                         saveFile(makeCloudCoinSingle(1), 1, ".stack");
                         break;
-                    case "2":
+                    case 2:
                         saveFile(makeCloudCoinStack(1), 1, ".stack");
                         break;
-                    case "3":
+                    case 3:
                         saveFile(makeCloudCoinJpg(), 1, ".jpg");
                         break;
-                    case "4":
+                    case 4:
                         saveFile(makeCloudCoinSingle(1), 1, ".stack");
                         saveFile(makeCloudCoinStack(2), 2, ".stack");
                         saveFile(makeCloudCoinJpg(), 3, ".jpg");
                         break;
-                    case "5":
+                    case 5:
                         saveFile(makeCloudCoinStackCustom(2, 100), 2, ".stack");
                         break;
-                    case "6":
+                    case 6:
                         saveFile(makeCloudCoinStackCustom(2, 1000), 2, ".stack");
                         break;
-                    case "7":
+                    case 7:
                         saveFile(makeCloudCoinStackCustom(2, 10000), 2, ".stack");
                         break;
-                    case "0":
+                    case 0:
                         return;
                 }
             } catch (Exception e) {

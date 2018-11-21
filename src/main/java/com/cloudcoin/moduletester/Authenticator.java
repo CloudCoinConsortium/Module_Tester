@@ -36,7 +36,7 @@ public class Authenticator {
     }
 
     public static void ShowCommandLineOutput() {
-        Scanner reader = new Scanner(System.in);
+        KeyboardReader reader = new KeyboardReader();
 
         while (true) {
             try {
@@ -47,33 +47,25 @@ public class Authenticator {
                 System.out.println("4. Authenticate 400 CloudCoins (Counterfeit)");
                 System.out.println("0. Exit");
 
-                reader.hasNext();
-                String input;
-                try {
-                    input = reader.next();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    reader = new Scanner(System.in);
-                    continue;
-                }
+                int input = reader.readInt();
 
                 switch (input) {
-                    case "1":
+                    case 1:
                         saveFile(makeCloudCoinCounterfeit(1), 1);
                         break;
-                    case "2":
+                    case 2:
                         for (int i = 0; i < 10; i++)
                             saveFile(makeCloudCoinCounterfeit(1 + i), 1 + i);
                         break;
-                    case "3":
+                    case 3:
                         for (int i = 0; i < 100; i++)
                             saveFile(makeCloudCoinCounterfeit(1 + i), 1 + i);
                         break;
-                    case "4":
+                    case 4:
                         for (int i = 0; i < 1000; i++)
                             saveFile(makeCloudCoinCounterfeit(1 + i), 1 + i);
                         break;
-                    case "0":
+                    case 0:
                         return;
                 }
             } catch (Exception e) {

@@ -104,14 +104,14 @@ public class Backupper {
      */
     public void backupCoins() {
 
-        Scanner reader = new Scanner(System.in);
+        KeyboardReader reader = new KeyboardReader();
 
         // Ask for Bacck up.
         System.out.println("Do you want to backup your CloudCoin?");
         System.out.println("1 => backup");
         System.out.println("2 => Exit");
 
-        int userChoice = reader.hasNextInt() ? reader.nextInt() : -1;
+        int userChoice = reader.readInt();
 
         if (userChoice < 1 || userChoice > 1) {
             if (userChoice == 2) {

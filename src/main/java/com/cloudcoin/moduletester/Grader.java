@@ -40,7 +40,7 @@ public class Grader {
     }
 
     public static void ShowCommandLineOutput() {
-        Scanner reader = new Scanner(System.in);
+        KeyboardReader reader = new KeyboardReader();
 
         while (true) {
             try {
@@ -56,40 +56,32 @@ public class Grader {
                 System.out.println("9. Grade 400 CloudCoins (hundred of each)");
                 System.out.println("0. Exit");
 
-                reader.hasNext();
-                String input;
-                try {
-                    input = reader.next();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    reader = new Scanner(System.in);
-                    continue;
-                }
+                int input = reader.readInt();
 
                 switch (input) {
-                    case "1":
+                    case 1:
                         saveFile(makeCloudCoinPassing(1), 1);
                         break;
-                    case "2":
+                    case 2:
                         saveFile(makeCloudCoinFracked(1), 1);
                         break;
-                    case "3":
+                    case 3:
                         saveFile(makeCloudCoinCounterfeit(1), 1);
                         break;
-                    case "4":
+                    case 4:
                         saveFile(makeCloudCoinLost(1), 1);
                         break;
-                    case "5":
+                    case 5:
                         saveFile(makeCloudCoinPassing(1), 1);
                         saveFile(makeCloudCoinFracked(2), 2);
                         saveFile(makeCloudCoinCounterfeit(3), 3);
                         saveFile(makeCloudCoinLost(4), 4);
                         break;
-                    case "6":
+                    case 6:
                         for (int i = 0; i < 10; i++)
                             saveFile(makeCloudCoinPassing(i), i);
                         break;
-                    case "7":
+                    case 7:
                         for (int i = 0; i < 10; i++)
                             saveFile(makeCloudCoinPassing(i), i);
                         for (int i = 0; i < 10; i++)
@@ -99,11 +91,11 @@ public class Grader {
                         for (int i = 0; i < 10; i++)
                             saveFile(makeCloudCoinLost(i), i);
                         break;
-                    case "8":
+                    case 8:
                         for (int i = 0; i < 100; i++)
                             saveFile(makeCloudCoinPassing(i), i);
                         break;
-                    case "9":
+                    case 9:
                         for (int i = 0; i < 100; i++)
                             saveFile(makeCloudCoinPassing(i), i);
                         for (int i = 0; i < 100; i++)
@@ -113,7 +105,7 @@ public class Grader {
                         for (int i = 0; i < 100; i++)
                             saveFile(makeCloudCoinLost(i), i);
                         break;
-                    case "0":
+                    case 0:
                         return;
                 }
             } catch (Exception e) {

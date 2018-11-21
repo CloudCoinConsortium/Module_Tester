@@ -45,7 +45,7 @@ public class Exporter {
     }
 
     public static void ShowCommandLineOutput() {
-        Scanner reader = new Scanner(System.in);
+        KeyboardReader reader = new KeyboardReader();
 
         while (true) {
             try {
@@ -61,47 +61,39 @@ public class Exporter {
                 System.out.println("9. Export 100000 250-CloudCoins, single stack");
                 System.out.println("0. Exit");
 
-                reader.hasNext();
-                String input;
-                try {
-                    input = reader.next();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    reader = new Scanner(System.in);
-                    continue;
-                }
+                int input = reader.readInt();
 
                 int denomination;
                 int sn;
                 switch (input) {
-                    case "1":
+                    case 1:
                         denomination = 1;
                         sn = denominationToSN(denomination);
                         saveCloudCoin(makeCloudCoin(sn), sn, denomination);
                         saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
                         saveCommand(makeCommand("2", "0", ""));
                         break;
-                    case "2":
+                    case 2:
                         denomination = 5;
                         sn = denominationToSN(denomination);
                         saveCloudCoin(makeCloudCoin(sn), sn, denomination);
                         saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
                         saveCommand(makeCommand("10", "1", ""));
                         break;
-                    case "3":
+                    case 3:
                         denomination = 25;
                         sn = denominationToSN(denomination);
                         saveCloudCoin(makeCloudCoin(sn), sn, denomination);
                         saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
                         saveCommand(makeCommand("50", "1", ""));
                         break;
-                    case "4":
+                    case 4:
                         denomination = 100;
                         sn = denominationToSN(denomination);
                         saveCloudCoin(makeCloudCoin(sn), sn, denomination);
                         saveCommand(makeCommand("100", "2", ""));
                         break;
-                    case "5":
+                    case 5:
                         denomination = 250;
                         sn = denominationToSN(denomination);
                         saveCloudCoin(makeCloudCoin(sn), sn, denomination);
@@ -109,7 +101,7 @@ public class Exporter {
                         saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
                         saveCommand(makeCommand("750", "3", ""));
                         break;
-                    case "6":
+                    case 6:
                         denomination = 1;
                         sn = denominationToSN(denomination);
                         saveCloudCoin(makeCloudCoin(sn), sn, denomination);
@@ -127,7 +119,7 @@ public class Exporter {
                         saveCloudCoin(makeCloudCoin(sn), sn, denomination);
                         saveCommand(makeCommand("381", "1", ""));
                         break;
-                    case "7":
+                    case 7:
                         denomination = 1;
                         sn = denominationToSN(denomination);
                         for (int i = 0; i < 1000; i++) {
@@ -135,7 +127,7 @@ public class Exporter {
                         }
                         saveCommand(makeCommand("1000", "1", ""));
                         break;
-                    case "8":
+                    case 8:
                         denomination = 1;
                         sn = denominationToSN(denomination);
                         for (int i = 0; i < 10000; i++) {
@@ -143,7 +135,7 @@ public class Exporter {
                         }
                         saveCommand(makeCommand("10000", "1", ""));
                         break;
-                    case "9":
+                    case 9:
                         denomination = 1;
                         sn = denominationToSN(denomination);
                         for (int i = 0; i < 100000; i++) {
@@ -152,7 +144,7 @@ public class Exporter {
                         saveCommand(makeCommand("100000", "1", ""));
                         break;
                     default:
-                    case "0":
+                    case 0:
                         return;
                 }
             } catch (Exception e) {
