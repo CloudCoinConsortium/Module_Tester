@@ -79,7 +79,7 @@ public class Main {
             case 5:
                 //test  ShowCoins
                 System.out.println("Testing ShowCoins.");
-
+                new ShowCoins();
                 break;
             case 6:
                 //test Depositer
