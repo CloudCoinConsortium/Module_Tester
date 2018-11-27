@@ -162,9 +162,9 @@ public class ShowCoins {
     }
 
     public static void CreateCommand() throws  IOException{
-        byte[] empty = new byte[0];
+        byte[] command = "{\r\n \"command\": \"showcoins\",\r\n \"account\": \"default\" \r\n}".getBytes();
 
-        Files.write(Paths.get( "C:\\CloudCoinServer\\Command\\Showcoins.showcoins.txt"), empty);
+        Files.write(Paths.get( "C:\\CloudCoinServer\\Command\\Showcoins.showcoins.txt"), command);
 
     }
 }
