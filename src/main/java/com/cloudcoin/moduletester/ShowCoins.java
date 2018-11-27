@@ -42,6 +42,7 @@ public class ShowCoins {
 
         while (true) {
             try {
+
                 System.out.println();
                 System.out.println("1. Show 1 CloudCoin (Bank)");
                 System.out.println("2. Show 10 CloudCoins (Fracked)");
@@ -53,20 +54,24 @@ public class ShowCoins {
 
                 switch (input) {
                     case 1:
+                        FlushFolder("Bank");
                         saveFile(makeCloudCoinCounterfeit(1), 1, "Bank");
                         CreateCommand();
                         break;
                     case 2:
+                        FlushFolder("Fracked");
                         for (int i = 0; i < 5; i++)
                             saveFile(makeCloudCoinCounterfeit(1 + i), 1 + i, "Fracked");
 						saveFile(makeCloudCoinCounterfeit(2097154), 2097154, "Fracked");
 						CreateCommand();
                         break;
                     case 3:
+                        FlushFolder("Lost");
                         saveFile(makeCloudCoinCounterfeit(6291458), 6291458, "Lost");
                         CreateCommand();
                         break;
                     case 4:
+                        FlushFolder("Bank");
                         for (int i = 0; i < 4; i++)
                             saveFile(makeCloudCoinCounterfeit(14680066 + i), 14680066 + i, "Bank");
                         CreateCommand();
@@ -78,6 +83,21 @@ public class ShowCoins {
                 System.out.println("Uncaught exception - " + e.getLocalizedMessage());
                 e.printStackTrace();
             }
+        }
+    }
+
+    private static void FlushFolder(String folder) {
+        try{
+            Files.newDirectoryStream(Paths.get(RootPath + folder + "\\")).forEach(file ->{
+                try{Files.deleteIfExists(file);}catch (IOException e){
+                    System.out.println("Uncaught exception - " + e.getLocalizedMessage());
+                    e.printStackTrace();
+                }
+            });
+        }
+        catch(IOException e){
+            System.out.println("Uncaught exception - " + e.getLocalizedMessage());
+            e.printStackTrace();
         }
     }
 
