@@ -1,5 +1,7 @@
 package com.cloudcoin.moduletester;
 
+import java.io.File;
+
 /**
  * Main is a main method that allows users to decide which test they would 
  *Like to run. 
@@ -10,7 +12,8 @@ package com.cloudcoin.moduletester;
 
 public class Main {
 
-    public static String RootPath = "C:\\CloudCoinServer\\accounts\\DefaultUser\\";
+    public static String RootPath = "C:\\CloudCoinServer\\accounts\\DefaultUser\\"
+            .replace("\\", File.separator);
     
     public static void main(String[] args) {
         greet();
@@ -31,8 +34,9 @@ public class Main {
     
     public static int getCommand(){
         //List all commands
-        String commands[] = {"Quit Tester","Test Echoer","Test Exporter","test backuper","Test Pay-Forward","Test ShowCoins","Test Depositer","Test Minder",
-                "Test Emailer","Test Vaulter","Test LossFixer","Test Grader","Test Translator","Test Unpacker","Test Authenticator","Test Vaulter"};
+        String commands[] = {"Quit Tester","Test Echoer","Test Exporter","test backuper","Test Pay-Forward","Test ShowCoins",
+                "Test Depositer","Test Minder","Test Emailer","Test Vaulter","Test LossFixer","Test Grader","Test Translator",
+                "Test Unpacker","Test Authenticator","Test Vaulter","Test Reauthenticator"};
 
         System.out.println("Enter the number of the command you wish to execute");
         for(int i= 0; i < commands.length; i++)
@@ -130,6 +134,11 @@ public class Main {
                 //test Vaulter
                 System.out.println("Testing Vaulter");
                 new Vaulter();
+                break;
+            case 16:
+                //test Reauthenticator
+                System.out.println("Testing Reauthenticator");
+                new Reauthenticator();
                 break;
             default:
                 System.out.println("Error running command. Please try again. ");
