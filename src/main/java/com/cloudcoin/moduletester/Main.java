@@ -57,7 +57,8 @@ public class Main {
             case 1: 
             //Execute Test Echoer
                System.out.println("Testing Echoer");
-
+                Echoer echoer = new Echoer();
+                echoer.StartWatching();
             break;
             case 2:
                 //test  Exporter
