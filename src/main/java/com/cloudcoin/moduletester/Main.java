@@ -36,7 +36,7 @@ public class Main {
         //List all commands
         String commands[] = {"Quit Tester","Test Echoer","Test Exporter","test backuper","Test Pay-Forward","Test ShowCoins",
                 "Test Depositer","Test Minder","Test Emailer","Test Vaulter","Test LossFixer","Test Grader","Test Translator",
-                "Test Unpacker","Test Authenticator","Test Vaulter","Test Reauthenticator"};
+                "Test Unpacker","Test Authenticator","Test Vaulter","Test Reauthenticator","Test Eraser"};
 
         System.out.println("Enter the number of the command you wish to execute");
         for(int i= 0; i < commands.length; i++)
@@ -139,6 +139,11 @@ public class Main {
                 //test Reauthenticator
                 System.out.println("Testing Reauthenticator");
                 new Reauthenticator();
+                break;
+            case 17:
+                //test Eraser
+                System.out.println("Testing Eraser");
+                new Eraser();
                 break;
             default:
                 System.out.println("Error running command. Please try again. ");
