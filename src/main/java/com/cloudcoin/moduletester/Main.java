@@ -3,8 +3,9 @@ package com.cloudcoin.moduletester;
 import java.io.File;
 
 /**
- * Main is a main method that allows users to decide which test they would 
- *Like to run. 
+ * Main is a main method that allows users to decide which test they would
+ * Like to run.
+ *
  * @author Sean H. Worthington
  * @author your name here
  * @version 1.1
@@ -14,55 +15,52 @@ public class Main {
 
     public static String RootPath = "C:\\CloudCoinServer\\accounts\\DefaultUser\\"
             .replace("\\", File.separator);
-    
+
     public static void main(String[] args) {
         greet();
-        while(true)
-        {
+        while (true) {
             executeCommand(getCommand());
         }
 
     }// end main
 
-    public static void greet(){
+    public static void greet() {
         System.out.println("This is the Servant Tester");
         System.out.println("Used to test servant modules");
         System.out.println("As is from the CloudCoin Consortium");
         System.out.println("Last changed: 11/04/2018");
         System.out.println("");
     }//end greeting
-    
-    public static int getCommand(){
+
+    public static int getCommand() {
         //List all commands
-        String commands[] = {"Quit Tester","Test Echoer","Test Exporter","test backuper","Test Pay-Forward","Test ShowCoins",
-                "Test Depositer","Test Minder","Test Emailer","Test Vaulter","Test LossFixer","Test Grader","Test Translator",
-                "Test Unpacker","Test Authenticator","Test Vaulter","Test Reauthenticator","Test Eraser"};
+        String commands[] = {"Quit Tester", "Test Echoer", "Test Exporter", "test backuper", "Test Pay-Forward", "Test ShowCoins",
+                "Test Depositer", "Test Minder", "Test Emailer", "Test Vaulter", "Test LossFixer", "Test Grader", "Test Translator",
+                "Test Unpacker", "Test Authenticator", "Test Vaulter", "Test Reauthenticator", "Test Eraser"};
 
         System.out.println("Enter the number of the command you wish to execute");
-        for(int i= 0; i < commands.length; i++)
-        {
-            int cn = i ;
-            System.out.println(cn+". " + commands[i]);//list each command in the commands array
+        for (int i = 0; i < commands.length; i++) {
+            int cn = i;
+            System.out.println(cn + ". " + commands[i]);//list each command in the commands array
         }//end list all commands
         KeyboardReader reader = new KeyboardReader();
-        int command = reader.readInt(0,commands.length);
-        return command; 
+        int command = reader.readInt(0, commands.length);
+        return command;
     }
 
-    public static void executeCommand(int commandNumber ){
-        switch(commandNumber)
-        {
-            case 0: 
-            //Execute Quit Program
+    public static void executeCommand(int commandNumber) {
+        switch (commandNumber) {
+            case 0:
+                //Execute Quit Program
                 System.out.println("Quiting.");
                 System.exit(0);
-            break;
+                break;
 
-            case 1: 
-            //Execute Test Echoer
-               System.out.println("Testing Echoer");
+            case 1:
+                //Execute Test Echoer
+                System.out.println("Testing Echoer");
 
-            break;
+                break;
             case 2:
                 //test  Exporter
                 System.out.println("Testing Exporter");
@@ -88,7 +86,7 @@ public class Main {
             case 6:
                 //test Depositer
                 System.out.println("Testing Depositer.");
-
+                new Depositer();
                 break;
             case 7:
                 //test Minder
