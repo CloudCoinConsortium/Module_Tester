@@ -10,7 +10,8 @@ import java.util.Scanner;
 
 public class Exporter {
 
-    private static String RootPath = Main.RootPath;
+    private static String RootPath = "C:\\CloudCoinServer\\"
+            .replace("\\", File.separator);
 
 
     private static String PasswordFolder = RootPath + "accounts\\Passwords" + File.separator;
@@ -156,9 +157,9 @@ public class Exporter {
 
     public static void saveCloudCoin(byte[] cloudCoin, int sn, int denomination) throws IOException {
         String filename = ensureFilenameUnique(denomination + ".CloudCoin.1." + sn,
-                ".stack", RootPath + "Bank\\");
-        Files.createDirectories(Paths.get(RootPath + "Bank\\"));
-        Files.write(Paths.get(RootPath + "Bank\\" + filename), cloudCoin);
+                ".stack", Main.RootPath + "Bank\\");
+        Files.createDirectories(Paths.get(Main.RootPath + "Bank\\"));
+        Files.write(Paths.get(Main.RootPath + "Bank\\" + filename), cloudCoin);
     }
 
     public static void saveCommand(byte[] command) throws IOException {
@@ -171,7 +172,7 @@ public class Exporter {
     public static byte[] makeCommand(String amount, String type, String tag) {
         return ("{\n" +
                 "      \"command\": \"exporter\",\n" +
-                "      \"account\": \"" + RootPath + "\",\n" +
+                "      \"account\": \"DefaultUser\",\n" +
                 "      \"amount\": " + amount + ",\n" +
                 "\t  \"type\": " + type + ",\n" +
                 "\t  \"tag\": \"" + tag + "\"\n" +

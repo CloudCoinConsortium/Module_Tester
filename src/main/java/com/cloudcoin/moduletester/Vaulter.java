@@ -130,8 +130,9 @@ public class Vaulter {
     public static byte[] makeCommand(String command, String amount) {
         return ("{\n" +
                 "      \"command\": \"" + command + "\",\n" +
-                "      \"account\": \"" + RootPath + "\",\n" +
-                "      \"amount\": \"" + amount + "\"\n" +
+                "      \"account\": \"DefaultUser\",\n" +
+                "      \"cloudcoin\": \"" + amount + "\",\n" +
+                "      \"passphrase\": \"password\"\n" +
                 "}").getBytes();
     }
 
