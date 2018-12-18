@@ -10,7 +10,7 @@ package com.cloudcoin.moduletester;
 
 public class Main {
 
-    public static String RootPath = "C:\\CloudCoinServer\\accounts\\DefaultUser\\";
+    public static String RootPath = "C:\\CloudCoin\\accounts\\DefaultUser\\";
     
     public static void main(String[] args) {
         greet();
@@ -104,7 +104,7 @@ public class Main {
             case 10:
                 //test LossFixer
                 System.out.println("Testing LossFixer.");
-
+                new LossFixer();
                 break;
             case 11:
                 //test Grader
