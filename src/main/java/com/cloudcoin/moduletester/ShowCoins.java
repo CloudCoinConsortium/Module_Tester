@@ -40,7 +40,7 @@ public class ShowCoins {
     public static void ShowCommandLineOutput() {
         KeyboardReader reader = new KeyboardReader();
 
-        while (true) {
+
             try {
 
                 System.out.println();
@@ -54,26 +54,26 @@ public class ShowCoins {
 
                 switch (input) {
                     case 1:
-                        FlushFolder("Bank");
-                        saveFile(makeCloudCoinCounterfeit(1), 1, "Bank");
+                        TestUtils.FlushFolder("Bank");
+                        TestUtils.saveFile(makeCloudCoinCounterfeit(1), 1, "Bank");
                         CreateCommand();
                         break;
                     case 2:
-                        FlushFolder("Fracked");
+                        TestUtils.FlushFolder("Fracked");
                         for (int i = 0; i < 5; i++)
-                            saveFile(makeCloudCoinCounterfeit(1 + i), 1 + i, "Fracked");
-						saveFile(makeCloudCoinCounterfeit(2097154), 2097154, "Fracked");
+                            TestUtils.saveFile(makeCloudCoinCounterfeit(1 + i), 1 + i, "Fracked");
+                        TestUtils.saveFile(makeCloudCoinCounterfeit(2097154), 2097154, "Fracked");
 						CreateCommand();
                         break;
                     case 3:
-                        FlushFolder("Lost");
-                        saveFile(makeCloudCoinCounterfeit(6291458), 6291458, "Lost");
+                        TestUtils.FlushFolder("Lost");
+                        TestUtils.saveFile(makeCloudCoinCounterfeit(6291458), 6291458, "Lost");
                         CreateCommand();
                         break;
                     case 4:
-                        FlushFolder("Bank");
+                        TestUtils.FlushFolder("Bank");
                         for (int i = 0; i < 4; i++)
-                            saveFile(makeCloudCoinCounterfeit(14680066 + i), 14680066 + i, "Bank");
+                            TestUtils.saveFile(makeCloudCoinCounterfeit(14680066 + i), 14680066 + i, "Bank");
                         CreateCommand();
                         break;
                     case 0:
@@ -83,28 +83,9 @@ public class ShowCoins {
                 System.out.println("Uncaught exception - " + e.getLocalizedMessage());
                 e.printStackTrace();
             }
-        }
     }
 
-    private static void FlushFolder(String folder) {
-        try{
-            Files.newDirectoryStream(Paths.get(RootPath + folder + "\\")).forEach(file ->{
-                try{Files.deleteIfExists(file);}catch (IOException e){
-                    System.out.println("Uncaught exception - " + e.getLocalizedMessage());
-                    e.printStackTrace();
-                }
-            });
-        }
-        catch(IOException e){
-            System.out.println("Uncaught exception - " + e.getLocalizedMessage());
-            e.printStackTrace();
-        }
-    }
 
-    public static void saveFile(byte[] cloudCoin, int sn, String folder) throws IOException {
-        String filename = ensureFilenameUnique(getDenomination(sn) + ".CloudCoin.1.0000" + sn + ".e054a34f2790fd3353ea26e5d92d9d2f",".stack", RootPath + folder + "\\");
-        Files.write(Paths.get(RootPath + folder + "\\" + filename), cloudCoin);
-    }
 
     public static byte[] makeCloudCoinCounterfeit(int sn) {
         return ("{\n" +
@@ -145,40 +126,6 @@ public class ShowCoins {
                 "    }\n" +
                 "  ]\n" +
                 "}").getBytes();
-    }
-
-    public static String ensureFilenameUnique(String filename, String extension, String folder) {
-        if (!Files.exists(Paths.get(folder + filename + extension)))
-            return filename + extension;
-
-        filename = filename + '.';
-        String newFilename;
-        int loopCount = 0;
-        do {
-            newFilename = filename + Integer.toString(++loopCount);
-        }
-        while (Files.exists(Paths.get(folder + newFilename + extension)));
-        return newFilename + extension;
-    }
-
-    public static int getDenomination(int sn) {
-        int nom;
-        if (sn < 1)
-            nom = 0;
-        else if ((sn < 2097153))
-            nom = 1;
-        else if ((sn < 4194305))
-            nom = 5;
-        else if ((sn < 6291457))
-            nom = 25;
-        else if ((sn < 14680065))
-            nom = 100;
-        else if ((sn < 16777217))
-            nom = 250;
-        else
-            nom = 0;
-
-        return nom;
     }
 
     public static void CreateCommand() throws  IOException{
