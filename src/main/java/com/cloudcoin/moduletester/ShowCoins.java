@@ -99,6 +99,12 @@ public class ShowCoins {
                 else
                 System.out.println("No Log file found. TEST FAILED");
 
+                System.out.println("All Tests Complete. Clearing out Folders used in testing.");
+                TestUtils.FlushFolder("Bank");
+                TestUtils.FlushFolder("Gallery");
+                TestUtils.FlushFolder("Lost");
+                TestUtils.FlushFolder("Fracked");
+
             } catch (Exception e) {
                 System.out.println("Uncaught exception - " + e.getLocalizedMessage());
                 e.printStackTrace();

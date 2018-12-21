@@ -57,7 +57,10 @@ public class LossFixer {
             e.printStackTrace();
         }
 
-        System.out.println("LossFixer Test Completed");
+        System.out.println("LossFixer Test Completed. Clearing out Folder used in testing.");
+        TestUtils.FlushFolder("Lost");
+        TestUtils.FlushFolder("Predetect");
+        TestUtils.FlushFolder("Detected");
 
     }
 
