@@ -47,6 +47,8 @@ public class ShowCoins {
 
                         TestUtils.FlushFolder("Bank");
                 TestUtils.FlushFolder("Gallery");
+                TestUtils.FlushFolder("Lost");
+                TestUtils.FlushFolder("Fracked");
                         TestUtils.saveFile(makeCloudCoinCounterfeit(1), 1, "Bank");
                 TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-ShowCoins-Java.jar\" C:\\CloudCoin");
                 //assert
@@ -57,7 +59,7 @@ public class ShowCoins {
 
                 System.out.println("Testing Show 10 CloudCoins (Fracked)");
 
-                        TestUtils.FlushFolder("Fracked");
+
                         for (int i = 0; i < 5; i++)
                             TestUtils.saveFile(makeCloudCoinCounterfeit(1 + i), 1 + i, "Fracked");
                         TestUtils.saveFile(makeCloudCoinCounterfeit(2097154), 2097154, "Fracked");
@@ -70,7 +72,7 @@ public class ShowCoins {
 
                 System.out.println("Testing Show 100 CloudCoins (Lost)");
 
-                        TestUtils.FlushFolder("Lost");
+
                         TestUtils.saveFile(makeCloudCoinCounterfeit(6291458), 6291458, "Lost");
                 TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-ShowCoins-Java.jar\" C:\\CloudCoin");
                 //assert
