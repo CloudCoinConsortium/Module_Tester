@@ -58,7 +58,7 @@ public class Main {
             case 1: 
             //Execute Test Echoer
                System.out.println("Testing Echoer");
-
+                new Echoer();
             break;
             case 2:
                 //test  Exporter
