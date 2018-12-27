@@ -1,5 +1,6 @@
 package com.cloudcoin.moduletester;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -28,6 +29,7 @@ public class Unpacker {
     public static void createDirectories() {
         try {
             Files.createDirectories(Paths.get(RootPath));
+            Files.createDirectories(Paths.get(RootPath + "Import\\"));
             Files.createDirectories(Paths.get(RootPath + "Suspect\\"));
         } catch (Exception e) {
             e.printStackTrace();
@@ -36,59 +38,123 @@ public class Unpacker {
 
     public static void ShowCommandLineOutput() {
         KeyboardReader reader = new KeyboardReader();
-
-        while (true) {
+        int input = 1;
+        while (input < 9) {
             try {
-                System.out.println();
-                System.out.println("1. Unpack CloudCoin (Single Stack)");
-                System.out.println("2. Unpack CloudCoins (Multi Stack: 2)");
-                System.out.println("3. Unpack CloudCoin (JPG)");
-                System.out.println("4. Unpack 4 CloudCoin files (one of each type)");
-                System.out.println("5. Unpack CloudCoins (Multi Stack: 100)");
-                System.out.println("6. Unpack CloudCoins (Multi Stack: 1000)");
-                System.out.println("7. Unpack CloudCoins (Multi Stack: 10000)");
-                System.out.println("0. Exit");
-
-                int input = reader.readInt();
+                System.out.println("Starting test for Unpacker");
+                System.out.println("Emptying Import and Suspect Folder");
+                TestUtils.FlushFolder("Import");
+                TestUtils.FlushFolder("Suspect");
 
                 switch (input) {
                     case 1:
-                        saveFile(makeCloudCoinSingle(1), 1, ".stack");
+                        System.out.println("1. Unpack CloudCoin (Single Stack)");
+                        byte[] testcoin = makeCloudCoinSingle(1);
+                        String testfilename = TestUtils.saveFile(testcoin, 1, "Import",  ".stack");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Unpacker-Java.jar\" C:\\CloudCoin");
+                        if(Files.exists(Paths.get(RootPath+ "Suspect\\" + testfilename))){
+
+                                System.out.println("Test coin is unpacked. TEST SUCCESSFUL");
+
+                        }else {
+                            System.out.println("Couldn't find test coin in Suspect Folder. TEST FAILED");
+                        }
                         break;
                     case 2:
-                        saveFile(makeCloudCoinStack(1), 1, ".stack");
+                        System.out.println("2. Unpack CloudCoins (Multi Stack: 2)");
+                        TestUtils.saveFile(makeCloudCoinStack(2), 2, "Import", ".stack");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Unpacker-Java.jar\" C:\\CloudCoin");
+                        if(Files.exists(Paths.get(RootPath+ "Suspect\\" + TestUtils.getDenomination(2) + ".CloudCoin.1." + 2 + ".stack"))
+                        &&Files.exists(Paths.get(RootPath+ "Suspect\\" + TestUtils.getDenomination(102) + ".CloudCoin.1." + 102 + ".stack"))
+                                &&Files.exists(Paths.get(RootPath+ "Suspect\\" + TestUtils.getDenomination(202) + ".CloudCoin.1." + 202 + ".stack")))
+                        {
+                            System.out.println("Test coin is unpacked. TEST SUCCESSFUL");
+                        }else {
+                            System.out.println("Couldn't find test coin in Suspect Folder. TEST FAILED");
+                        }
                         break;
                     case 3:
-                        saveFile(makeCloudCoinJpg(), 1, ".jpg");
+                        System.out.println("3. Unpack CloudCoin (JPG)");
+                        TestUtils.saveFile(makeCloudCoinJpg(), 1346931, "Import",".jpg");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Unpacker-Java.jar\" C:\\CloudCoin");
+                        if(Files.exists(Paths.get(RootPath+ "Suspect\\" + "1.CloudCoin.1.1346931.stack"))){
+
+                            System.out.println("Test coin is unpacked. TEST SUCCESSFUL");
+
+                        }else {
+                            System.out.println("Couldn't find test coin in Suspect Folder. TEST FAILED");
+                        }
                         break;
                     case 4:
-                        saveFile(makeCloudCoinSingle(1), 1, ".stack");
-                        saveFile(makeCloudCoinStack(2), 2, ".stack");
-                        saveFile(makeCloudCoinJpg(), 3, ".jpg");
+                        System.out.println("4. Unpack 4 CloudCoin files (one of each type)");
+                        String testcoin1 = TestUtils.saveFile(makeCloudCoinSingle(4), 4, "Import",".stack");
+                        TestUtils.saveFile(makeCloudCoinStack(5), 5, "Import",".stack");
+                        //TestUtils.saveFile(makeCloudCoinJpg(), 6, "Import",".jpg");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Unpacker-Java.jar\" C:\\CloudCoin");
+                        if(Files.exists(Paths.get(RootPath+ "Suspect\\" + testcoin1))
+                        &&Files.exists(Paths.get(RootPath+ "Suspect\\" +  TestUtils.getDenomination(5) + ".CloudCoin.1." + 5 + ".stack"))
+                        &&Files.exists(Paths.get(RootPath+ "Suspect\\" +  TestUtils.getDenomination(105) + ".CloudCoin.1." + 105 + ".stack"))
+                        &&Files.exists(Paths.get(RootPath+ "Suspect\\" +  TestUtils.getDenomination(205) + ".CloudCoin.1." + 205 + ".stack"))){
+
+                            System.out.println("Test coin is unpacked. TEST SUCCESSFUL");
+
+                        }else {
+                            System.out.println("Couldn't find test coin in Suspect Folder. TEST FAILED");
+                        }
                         break;
+                        /*
                     case 5:
-                        saveFile(makeCloudCoinStackCustom(2, 100), 2, ".stack");
+                        System.out.println("5. Unpack CloudCoins (Multi Stack: 100)");
+                        TestUtils.saveFile(makeCloudCoinStackCustom(7, 100), 7, "Import",".stack");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Unpacker-Java.jar\" C:\\CloudCoin");
+                        if(Files.exists(Paths.get(RootPath+ "Suspect\\" + testfilename))){
+
+                            System.out.println("Test coin is unpacked. TEST SUCCESSFUL");
+
+                        }else {
+                            System.out.println("Couldn't find test coin in Suspect Folder. TEST FAILED");
+                        }
                         break;
                     case 6:
-                        saveFile(makeCloudCoinStackCustom(2, 1000), 2, ".stack");
+                        System.out.println("6. Unpack CloudCoins (Multi Stack: 1000)");
+                        TestUtils.saveFile(makeCloudCoinStackCustom(8, 1000), 8, "Import",".stack");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Unpacker-Java.jar\" C:\\CloudCoin");
+                        if(Files.exists(Paths.get(RootPath+ "Suspect\\" + testfilename))){
+
+                            System.out.println("Test coin is unpacked. TEST SUCCESSFUL");
+
+                        }else {
+                            System.out.println("Couldn't find test coin in Suspect Folder. TEST FAILED");
+                        }
                         break;
                     case 7:
-                        saveFile(makeCloudCoinStackCustom(2, 10000), 2, ".stack");
+                        System.out.println("7. Unpack CloudCoins (Multi Stack: 10000)");
+                        TestUtils.saveFile(makeCloudCoinStackCustom(9, 10000), 9, "Import",".stack");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Unpacker-Java.jar\" C:\\CloudCoin");
+                        if(Files.exists(Paths.get(RootPath+ "Suspect\\" + testfilename))){
+
+                            System.out.println("Test coin is unpacked. TEST SUCCESSFUL");
+
+                        }else {
+                            System.out.println("Couldn't find test coin in Suspect Folder. TEST FAILED");
+                        }
                         break;
-                    case 0:
+                        */
+                    case 8:
+                        System.out.println("Finished Testing. Clearing out tested Folders.");
+                        TestUtils.FlushFolder("Import");
+                        TestUtils.FlushFolder("Suspect");
                         return;
                 }
             } catch (Exception e) {
                 System.out.println("Uncaught exception - " + e.getLocalizedMessage());
                 e.printStackTrace();
             }
+        input++;
         }
     }
 
-    public static void saveFile(byte[] cloudCoin, int sn, String extension) throws IOException {
-        String filename = ensureFilenameUnique("1.CloudCoin.1.0000" + sn + ".e054a34f2790fd3353ea26e5d92d9d2f",extension, RootPath + "Detected\\");
-        Files.write(Paths.get(RootPath + "Import\\" + filename), cloudCoin);
-    }
+
 
     public static byte[] makeCloudCoinSingle(int sn) {
         return ("{\n" +
@@ -269,17 +335,5 @@ public class Unpacker {
         return cloudCoin.toString().getBytes();
     }
 
-    public static String ensureFilenameUnique(String filename, String extension, String folder) {
-        if (!Files.exists(Paths.get(folder + filename + extension)))
-            return filename + extension;
 
-        filename = filename + '.';
-        String newFilename;
-        int loopCount = 0;
-        do {
-            newFilename = filename + Integer.toString(++loopCount);
-        }
-        while (Files.exists(Paths.get(folder + newFilename + extension)));
-        return newFilename + extension;
-    }
 }

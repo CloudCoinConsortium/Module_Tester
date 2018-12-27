@@ -39,9 +39,16 @@ public class TestUtils {
         }
     }
 
-    public static void saveFile(byte[] cloudCoin, int sn, String folder) throws IOException {
+    public static String saveFile(byte[] cloudCoin, int sn, String folder) throws IOException {
         String filename = ensureFilenameUnique(getDenomination(sn) + ".CloudCoin.1." + sn + ".",".stack", Main.RootPath + folder + "\\");
         Files.write(Paths.get(Main.RootPath + folder + "\\" + filename), cloudCoin);
+        return filename;
+    }
+    public static String saveFile(byte[] cloudCoin, int sn, String folder, String extension) throws IOException {
+        String filename = ensureFilenameUnique(getDenomination(sn) + ".CloudCoin.1." + sn + ".",extension, Main.RootPath + folder + "\\");
+        Files.write(Paths.get(Main.RootPath + folder + "\\" + filename), cloudCoin);
+        return filename;
+
     }
 
 
