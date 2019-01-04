@@ -37,14 +37,15 @@ public class Unpacker {
     }
 
     public static void ShowCommandLineOutput() {
-        KeyboardReader reader = new KeyboardReader();
+        //KeyboardReader reader = new KeyboardReader();
         int input = 1;
+        System.out.println("Starting test for Unpacker");
+        System.out.println("Emptying Import and Suspect Folder");
+        TestUtils.FlushFolder("Import");
+        TestUtils.FlushFolder("Suspect");
         while (input < 9) {
             try {
-                System.out.println("Starting test for Unpacker");
-                System.out.println("Emptying Import and Suspect Folder");
-                TestUtils.FlushFolder("Import");
-                TestUtils.FlushFolder("Suspect");
+
 
                 switch (input) {
                     case 1:
