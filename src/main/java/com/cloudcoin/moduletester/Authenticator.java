@@ -36,49 +36,90 @@ public class Authenticator {
     }
 
     public static void ShowCommandLineOutput() {
-        KeyboardReader reader = new KeyboardReader();
+        int input = 1;
+        System.out.println();
 
-        while (true) {
+        System.out.println("Starting test for Authenticator");
+        System.out.println("Emptying Detected and Suspect Folder");
+        TestUtils.FlushFolder("Suspect");
+        TestUtils.FlushFolder("Detected");
+        boolean test2 = true;
+        boolean test3 = true;
+        boolean test4 = true;
+
+
+        while (input < 5) {
             try {
-                System.out.println();
-                System.out.println("1. Authenticate 1 CloudCoin (Counterfeit)");
-                System.out.println("2. Authenticate 10 CloudCoins (Counterfeit)");
-                System.out.println("3. Authenticate 100 CloudCoins (Counterfeit)");
-                System.out.println("4. Authenticate 400 CloudCoins (Counterfeit)");
-                System.out.println("0. Exit");
-
-                int input = reader.readInt();
 
                 switch (input) {
                     case 1:
-                        saveFile(makeCloudCoinCounterfeit(1), 1);
+                        System.out.println("1. Authenticate 1 CloudCoin (Counterfeit)");
+                        TestUtils.saveFile(makeCloudCoinCounterfeit(1), 1, "Suspect");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Authenticator-Java.jar\" C:\\CloudCoin");
+                        if(Files.exists(Paths.get(RootPath + "Detected\\" + TestUtils.getDenomination(1) + ".CloudCoin.1." + 1 + ".stack"))) {
+                            System.out.println("TEST 1 SUCCESS");
+                        }
+                        else{
+                            System.out.println("TEST 1 FAILED: Test coin not found in Detected folder.");
+                        }
                         break;
                     case 2:
+                        System.out.println("2. Authenticate 10 CloudCoins (Counterfeit)");
                         for (int i = 0; i < 10; i++)
-                            saveFile(makeCloudCoinCounterfeit(1 + i), 1 + i);
+                            TestUtils.saveFile(makeCloudCoinCounterfeit(2 + i), 2 + i, "Suspect");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Authenticator-Java.jar\" C:\\CloudCoin");
+                        for (int j = 0; j < 10; j++)
+                            if(!Files.exists(Paths.get(RootPath + "Detected\\" + TestUtils.getDenomination(2 + j) + ".CloudCoin.1." + (2+j) + ".stack")))
+                                test2 = false;
+                        if(test2) {
+                            System.out.println("TEST 2 SUCCESS");
+                        }
+                        else{
+                            System.out.println("TEST 2 FAILED: a Test coin not found in Detected folder.");
+                        }
                         break;
                     case 3:
+                        System.out.println("3. Authenticate 100 CloudCoins (Counterfeit)");
                         for (int i = 0; i < 100; i++)
-                            saveFile(makeCloudCoinCounterfeit(1 + i), 1 + i);
+                            TestUtils.saveFile(makeCloudCoinCounterfeit(100 + i), 100 + i, "Suspect");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Authenticator-Java.jar\" C:\\CloudCoin");
+                        for (int j = 0; j < 100; j++)
+                            if(!Files.exists(Paths.get(RootPath + "Detected\\" + TestUtils.getDenomination(100 + j) + ".CloudCoin.1." + (100+j) + ".stack")))
+                                test3 = false;
+                        if(test3) {
+                            System.out.println("TEST 3 SUCCESS");
+                        }
+                        else{
+                            System.out.println("TEST 3 FAILED: a Test coin not found in Detected folder.");
+                        }
                         break;
                     case 4:
+                        System.out.println("4. Authenticate 400 CloudCoins (Counterfeit)");
                         for (int i = 0; i < 1000; i++)
-                            saveFile(makeCloudCoinCounterfeit(1 + i), 1 + i);
+                            TestUtils.saveFile(makeCloudCoinCounterfeit(1000 + i), 1000 + i, "Suspect");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Authenticator-Java.jar\" C:\\CloudCoin");
+                        for (int j = 0; j < 1000; j++)
+                            if(!Files.exists(Paths.get(RootPath + "Detected\\" + TestUtils.getDenomination(1000 + j) + ".CloudCoin.1." + (1000+j) + ".stack")))
+                                test4 = false;
+                        if(test4) {
+                            System.out.println("TEST 4 SUCCESS");
+                        }
+                        else{
+                            System.out.println("TEST 4 FAILED: a Test coin not found in Detected folder.");
+                        }
                         break;
-                    case 0:
+                    case 5:
                         return;
                 }
             } catch (Exception e) {
                 System.out.println("Uncaught exception - " + e.getLocalizedMessage());
                 e.printStackTrace();
             }
+        input++;
         }
     }
 
-    public static void saveFile(byte[] cloudCoin, int sn) throws IOException {
-        String filename = ensureFilenameUnique("1.CloudCoin.1.0000" + sn + ".e054a34f2790fd3353ea26e5d92d9d2f",".stack", RootPath + "Detected\\");
-        Files.write(Paths.get(RootPath + "Suspect\\" + filename), cloudCoin);
-    }
+
 
     public static byte[] makeCloudCoinCounterfeit(int sn) {
         return ("{\n" +
@@ -114,24 +155,11 @@ public class Authenticator {
                 "        \"00000000000000000000000000000000\"\n" +
                 "      ],\n" +
                 "      \"ed\": \"11-2020\",\n" +
-                "      \"pown\": \"fffffffffffffffffffffffff\",\n" +
+                "      \"pown\": \"uuuuuuuuuuuuuuuuuuuuuuuuu\",\n" +
                 "      \"aoid\": []\n" +
                 "    }\n" +
                 "  ]\n" +
                 "}").getBytes();
     }
 
-    public static String ensureFilenameUnique(String filename, String extension, String folder) {
-        if (!Files.exists(Paths.get(folder + filename + extension)))
-            return filename + extension;
-
-        filename = filename + '.';
-        String newFilename;
-        int loopCount = 0;
-        do {
-            newFilename = filename + Integer.toString(++loopCount);
-        }
-        while (Files.exists(Paths.get(folder + newFilename + extension)));
-        return newFilename + extension;
-    }
 }
