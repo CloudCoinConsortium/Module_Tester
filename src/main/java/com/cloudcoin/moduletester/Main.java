@@ -85,22 +85,22 @@ public class Main {
             case 6:
                 //test Depositer
                 System.out.println("Testing Depositer.");
-
+                new Depositer();
                 break;
             case 7:
                 //test Minder
                 System.out.println("Testing Minder.");
-
+                new Minder();
                 break;
             case 8:
                 //test Emailer
-                System.out.println("Testing Emailer.");
-
+                System.out.println("Testing Eraser.");
+                new Eraser();
                 break;
             case 9:
                 //test Vaulter
                 System.out.println("Testing Vaulter.");
-
+                new Vaulter();
                 break;
             case 10:
                 //test LossFixer

@@ -41,18 +41,19 @@ public class Backupper {
     public static final String TAG_PASSWORDS = "Passwords";
 
 //    public static final String RootPath = Paths.get("").toAbsolutePath().toString() + File.separator;
-    public static String RootPath = Main.RootPath;
+private static String RootPath = "C:\\CloudCoin\\";
+    private static String DefaultPath = Main.RootPath;
 
     public static String CommandFolder = RootPath + TAG_CLOUD_COIN + File.separator + TAG_COMMAND + File.separator;
-    public static String LogsFolder = RootPath + TAG_CLOUD_COIN + File.separator + TAG_LOGS + File.separator
+    public static String LogsFolder = RootPath + TAG_LOGS + File.separator
             + TAG_BACKUPER + File.separator;
-    public static String AccountFolder = RootPath + TAG_CLOUD_COIN + File.separator + TAG_ACCOUNTS
+    public static String AccountFolder = RootPath  + TAG_ACCOUNTS
             + File.separator + TAG_PASSWORDS + File.separator;
-    public static String backupFolder = LogsFolder + TAG_BACKUP_DEFAULT + File.separator;
+    public static String backupFolder = DefaultPath + TAG_BACKUP_DEFAULT + File.separator;
 
-    public static String GalleryFolder = RootPath + TAG_GALLERY + File.separator;
-    public static String BankFolder = RootPath + TAG_BANK + File.separator;
-    public static String FrackedFolder = RootPath + TAG_FRACKED + File.separator;
+    public static String GalleryFolder = DefaultPath + TAG_GALLERY + File.separator;
+    public static String BankFolder = DefaultPath + TAG_BANK + File.separator;
+    public static String FrackedFolder = DefaultPath + TAG_FRACKED + File.separator;
 
     public static String Tag_account = RootPath + TAG_CLOUD_COIN + File.separator + TAG_ACCOUNTS;
     private static DateTimeFormatter timestampFormat = DateTimeFormatter.ofPattern("yyyy MMM dd HH.mm ss a");
@@ -60,10 +61,29 @@ public class Backupper {
     public Backupper() {
         createDirectories();
         try {
+            System.out.println("Starting test for Backupper");
+            System.out.println("Emptying Backup and Bank Folder");
+            TestUtils.FlushFolder("Bank");
+            TestUtils.FlushFolder("Backup");
+
             saveCommand(makeCommand());
-            saveAccountFile(makePassword());
-        } catch (IOException ex) {
+            //saveAccountFile(makePassword());
+
+            TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Backupper-Java.jar\" C:\\CloudCoin");
+            String[] inBackupFolder = TestUtils.selectFileNamesInFolder(backupFolder);
+            if(inBackupFolder.length > 0){
+                System.out.println("TEST SUCCESS");
+            }
+            else{
+                System.out.println("TEST FAILED: No Files in Backup Folder");
+            }
+            System.out.println("All Test. Clearing out Folders used in testing.");
+            TestUtils.FlushFolder("Bank");
+            TestUtils.FlushFolder("Backup");
+        } catch (Exception ex) {
             Logger.getLogger(Backupper.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Uncaught exception - " + ex.getLocalizedMessage());
+            ex.printStackTrace();
         }
     }
 
@@ -91,7 +111,7 @@ public class Backupper {
         return ("{\n"
                 + "      \"command\": \"backupper\",\n"
                 + "      \"account\": \"1\",\n"
-                + "      \"toPath\": \"" + "\"\n"
+                + "      \"toPath\": \"" + backupFolder + "\"\n"
                 + "}").getBytes();
     }
     public static byte[] makePassword() {

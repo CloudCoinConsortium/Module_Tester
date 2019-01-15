@@ -41,73 +41,93 @@ public class Grader {
 
     public static void ShowCommandLineOutput() {
         KeyboardReader reader = new KeyboardReader();
+        int input = 1;
 
-        while (true) {
+        System.out.println("Starting test for Grader");
+        System.out.println("Emptying Associated Folders");
+        TestUtils.FlushFolder("Bank");
+        TestUtils.FlushFolder("Detected");
+        TestUtils.FlushFolder("Counterfeit");
+        TestUtils.FlushFolder("Lost");
+        TestUtils.FlushFolder("Fracked");
+
+        while (input < 7) {
             try {
-                System.out.println();
-                System.out.println("1. Grade 1 CloudCoin (Passing)");
-                System.out.println("2. Grade 1 CloudCoin (Fracked)");
-                System.out.println("3. Grade 1 CloudCoin (Counterfeit)");
-                System.out.println("4. Grade 1 CloudCoin (Lost)");
-                System.out.println("5. Grade 4 CloudCoins (one of each)");
-                System.out.println("6. Grade 10 CloudCoins (Passing)");
-                System.out.println("7. Grade 40 CloudCoins (ten of each)");
-                System.out.println("8. Grade 100 CloudCoins (Passing)");
-                System.out.println("9. Grade 400 CloudCoins (hundred of each)");
-                System.out.println("0. Exit");
 
-                int input = reader.readInt();
 
                 switch (input) {
                     case 1:
-                        saveFile(makeCloudCoinPassing(1), 1);
+                        System.out.println("1. Grade 1 CloudCoin (Passing)");
+                        TestUtils.saveFile(makeCloudCoinPassing(1), 1, "Detected");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Grader-Java.jar\" C:\\CloudCoin");
+                        if(Files.exists(Paths.get(RootPath + "Bank\\" + TestUtils.getDenomination(1) + ".CloudCoin.1." + 1 + ".stack"))) {
+                            System.out.println("TEST 1 SUCCESS");
+                        }
+                        else{
+                            System.out.println("TEST 1 FAILED: Test coin not found in Bank folder.");
+                        }
                         break;
                     case 2:
-                        saveFile(makeCloudCoinFracked(1), 1);
+                        System.out.println("2. Grade 1 CloudCoin (Fracked)");
+                        TestUtils.saveFile(makeCloudCoinFracked(1), 1, "Detected");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Grader-Java.jar\" C:\\CloudCoin");
+                        if(Files.exists(Paths.get(RootPath + "Fracked\\" + TestUtils.getDenomination(1) + ".CloudCoin.1." + 1 + ".stack"))) {
+                            System.out.println("TEST 2 SUCCESS");
+                        }
+                        else{
+                            System.out.println("TEST 2 FAILED: Test coin not found in Fracked folder.");
+                        }
                         break;
                     case 3:
-                        saveFile(makeCloudCoinCounterfeit(1), 1);
+                        System.out.println("3. Grade 1 CloudCoin (Counterfeit)");
+                        TestUtils.saveFile(makeCloudCoinCounterfeit(1), 1, "Detected");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Grader-Java.jar\" C:\\CloudCoin");
+                        if(Files.exists(Paths.get(RootPath + "Counterfeit\\" + TestUtils.getDenomination(1) + ".CloudCoin.1." + 1 + ".stack"))) {
+                            System.out.println("TEST 3 SUCCESS");
+                        }
+                        else{
+                            System.out.println("TEST 3 FAILED: Test coin not found in Counterfeit folder.");
+                        }
                         break;
                     case 4:
-                        saveFile(makeCloudCoinLost(1), 1);
+                        System.out.println("4. Grade 1 CloudCoin (Lost)");
+                        TestUtils.saveFile(makeCloudCoinLost(1), 1, "Detected");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Grader-Java.jar\" C:\\CloudCoin");
+                        if(Files.exists(Paths.get(RootPath + "Lost\\" + TestUtils.getDenomination(1) + ".CloudCoin.1." + 1 + ".stack"))) {
+                            System.out.println("TEST 4 SUCCESS");
+                        }
+                        else{
+                            System.out.println("TEST 4 FAILED: Test coin not found in Lost folder.");
+                        }
                         break;
                     case 5:
-                        saveFile(makeCloudCoinPassing(1), 1);
-                        saveFile(makeCloudCoinFracked(2), 2);
-                        saveFile(makeCloudCoinCounterfeit(3), 3);
-                        saveFile(makeCloudCoinLost(4), 4);
+                        System.out.println("5. Grade 4 CloudCoins (one of each)");
+                        TestUtils.saveFile(makeCloudCoinPassing(2), 2, "Detected");
+                        TestUtils.saveFile(makeCloudCoinFracked(3), 3, "Detected");
+                        TestUtils.saveFile(makeCloudCoinCounterfeit(4), 4, "Detected");
+                        TestUtils.saveFile(makeCloudCoinLost(5), 5, "Detected");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Grader-Java.jar\" C:\\CloudCoin");
+                        if(Files.exists(Paths.get(RootPath + "Bank\\" + TestUtils.getDenomination(2) + ".CloudCoin.1." + 2 + ".stack")) &&
+                                Files.exists(Paths.get(RootPath + "Fracked\\" + TestUtils.getDenomination(3) + ".CloudCoin.1." + 3 + ".stack")) &&
+                                Files.exists(Paths.get(RootPath + "Counterfeit\\" + TestUtils.getDenomination(4) + ".CloudCoin.1." + 4 + ".stack")) &&
+                                Files.exists(Paths.get(RootPath + "Lost\\" + TestUtils.getDenomination(5) + ".CloudCoin.1." + 5 + ".stack"))) {
+                            System.out.println("TEST 5 SUCCESS");
+                        }
+                        else{
+                            System.out.println("TEST 5 FAILED: Test coin not found in Appropriate folder.");
+                        }
                         break;
+
                     case 6:
-                        for (int i = 0; i < 10; i++)
-                            saveFile(makeCloudCoinPassing(i), i);
-                        break;
-                    case 7:
-                        for (int i = 0; i < 10; i++)
-                            saveFile(makeCloudCoinPassing(i), i);
-                        for (int i = 0; i < 10; i++)
-                            saveFile(makeCloudCoinFracked(i), i);
-                        for (int i = 0; i < 10; i++)
-                            saveFile(makeCloudCoinCounterfeit(i), i);
-                        for (int i = 0; i < 10; i++)
-                            saveFile(makeCloudCoinLost(i), i);
-                        break;
-                    case 8:
-                        for (int i = 0; i < 100; i++)
-                            saveFile(makeCloudCoinPassing(i), i);
-                        break;
-                    case 9:
-                        for (int i = 0; i < 100; i++)
-                            saveFile(makeCloudCoinPassing(i), i);
-                        for (int i = 0; i < 100; i++)
-                            saveFile(makeCloudCoinFracked(i), i);
-                        for (int i = 0; i < 100; i++)
-                            saveFile(makeCloudCoinCounterfeit(i), i);
-                        for (int i = 0; i < 100; i++)
-                            saveFile(makeCloudCoinLost(i), i);
-                        break;
-                    case 0:
+                        System.out.println("All Tests Complete. Clearing out Folders used in testing.");
+                        TestUtils.FlushFolder("Bank");
+                        TestUtils.FlushFolder("Counterfeit");
+                        TestUtils.FlushFolder("Lost");
+                        TestUtils.FlushFolder("Fracked");
+                        TestUtils.FlushFolder("Detected");
                         return;
                 }
+                input++;
             } catch (Exception e) {
                 System.out.println("Uncaught exception - " + e.getLocalizedMessage());
                 e.printStackTrace();
@@ -115,10 +135,7 @@ public class Grader {
         }
     }
 
-    public static void saveFile(byte[] cloudCoin, int sn) throws IOException {
-        String filename = ensureFilenameUnique("1.CloudCoin.1.0000" + sn + ".e054a34f2790fd3353ea26e5d92d9d2f",".stack", RootPath + "Detected\\");
-        Files.write(Paths.get(RootPath + "Detected\\" + filename), cloudCoin);
-    }
+
 
     public static byte[] makeCloudCoinPassing(int sn) {
         return makeCloudCoin(sn, "ppppppppppppppppppppppppp");
@@ -129,11 +146,11 @@ public class Grader {
     }
 
     public static byte[] makeCloudCoinCounterfeit(int sn) {
-        return makeCloudCoin(sn, "pppppppppppppppppppf");
+        return makeCloudCoin(sn, "pppppppppppppppppppffffff");
     }
 
     public static byte[] makeCloudCoinLost(int sn) {
-        return makeCloudCoin(sn, "ppppppppppppppppppp");
+        return makeCloudCoin(sn, "pppppppppppppppppppnnnnnn");
     }
 
     public static byte[] makeCloudCoin(int sn, String pown) {

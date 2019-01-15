@@ -10,7 +10,8 @@ import java.util.Scanner;
 
 public class Exporter {
 
-    private static String RootPath = Main.RootPath;
+    private static String RootPath = "C:\\CloudCoin\\";
+    private static String DefaultPath = Main.RootPath;
 
 
     private static String PasswordFolder = RootPath + "accounts\\Passwords" + File.separator;
@@ -37,8 +38,14 @@ public class Exporter {
 
     public static void createDirectories() {
         try {
-            Files.createDirectories(Paths.get(RootPath));
+            Files.createDirectories(Paths.get(DefaultPath));
             Files.createDirectories(Paths.get(CommandFolder));
+            Files.createDirectories(Paths.get(RootPath + "Detected\\"));
+            Files.createDirectories(Paths.get(RootPath + "Bank\\"));
+            Files.createDirectories(Paths.get(RootPath + "Fracked\\"));
+            Files.createDirectories(Paths.get(RootPath + "Counterfeit\\"));
+            Files.createDirectories(Paths.get(RootPath + "Lost\\"));
+            Files.createDirectories(Paths.get(RootPath + "Export\\"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,60 +54,111 @@ public class Exporter {
     public static void ShowCommandLineOutput() {
         KeyboardReader reader = new KeyboardReader();
 
-        while (true) {
+        int input = 1;
+
+        while (input < 7) {
             try {
                 System.out.println();
-                System.out.println("1. Export 2 1-CloudCoins, multiple files");
-                System.out.println("2. Export 2 5-CloudCoins, single stack");
-                System.out.println("3. Export 2 25-CloudCoins, single stack");
-                System.out.println("4. Export 1 100-CloudCoins, jpg");
-                System.out.println("5. Export 3 250-CloudCoin, csv");
-                System.out.println("6. Export 381 CloudCoins, single stack");
-                System.out.println("7. Export 1000 1-CloudCoins, single stack");
-                System.out.println("8. Export 10000 25-CloudCoins, single stack");
-                System.out.println("9. Export 100000 250-CloudCoins, single stack");
-                System.out.println("0. Exit");
 
-                int input = reader.readInt();
+                System.out.println("Starting test for Exporter");
+                System.out.println("Emptying Associated Folders");
+                TestUtils.FlushFolder("Bank");
+                TestUtils.FlushFolder("Export");
+
+
+                //System.out.println("6. Export 381 CloudCoins, single stack");
+                //System.out.println("7. Export 1000 1-CloudCoins, single stack");
+                //System.out.println("8. Export 10000 25-CloudCoins, single stack");
+                //System.out.println("9. Export 100000 250-CloudCoins, single stack");
+                //System.out.println("0. Exit");
+
+
 
                 int denomination;
                 int sn;
                 switch (input) {
                     case 1:
+                        System.out.println("1. Export 2 1-CloudCoins, multiple files");
                         denomination = 1;
                         sn = denominationToSN(denomination);
                         saveCloudCoin(makeCloudCoin(sn), sn, denomination);
                         saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
                         saveCommand(makeCommand("2", "0", ""));
+
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin");
+                        if(Files.exists(Paths.get(RootPath + "Export\\" + denomination + ".CloudCoin."  + ".stack")) &&
+                                Files.exists(Paths.get(RootPath + "Export\\" + denomination + ".CloudCoin." + ".stack"))) {
+                            System.out.println("TEST 1 SUCCESS");
+                        }
+                        else{
+                            System.out.println("TEST 1 FAILED: Test coin not found in Export folder.");
+                        }
                         break;
                     case 2:
+                        System.out.println("2. Export 2 5-CloudCoins, single stack");
                         denomination = 5;
                         sn = denominationToSN(denomination);
                         saveCloudCoin(makeCloudCoin(sn), sn, denomination);
                         saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
                         saveCommand(makeCommand("10", "1", ""));
+
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin");
+                        if(Files.exists(Paths.get(RootPath + "Export\\" + (denomination * 2) + ".CloudCoin."  + ".stack"))) {
+                            System.out.println("TEST 2 SUCCESS");
+                        }
+                        else{
+                            System.out.println("TEST 2 FAILED: Test coin not found in Export folder.");
+                        }
                         break;
                     case 3:
+                        System.out.println("3. Export 2 25-CloudCoins, single stack");
                         denomination = 25;
                         sn = denominationToSN(denomination);
                         saveCloudCoin(makeCloudCoin(sn), sn, denomination);
                         saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
                         saveCommand(makeCommand("50", "1", ""));
+
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin");
+                        if(Files.exists(Paths.get(RootPath + "Export\\" + (denomination * 2) + ".CloudCoin." + ".stack")) ) {
+                            System.out.println("TEST 3 SUCCESS");
+                        }
+                        else{
+                            System.out.println("TEST 3 FAILED: Test coin not found in Export folder.");
+                        }
                         break;
                     case 4:
+                        System.out.println("4. Export 1 100-CloudCoins, jpg");
                         denomination = 100;
                         sn = denominationToSN(denomination);
                         saveCloudCoin(makeCloudCoin(sn), sn, denomination);
                         saveCommand(makeCommand("100", "2", ""));
+
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin");
+                        if(Files.exists(Paths.get(RootPath + "Export\\" + denomination + ".CloudCoin."  + ".jpg")) ) {
+                            System.out.println("TEST 4 SUCCESS");
+                        }
+                        else{
+                            System.out.println("TEST 4 FAILED: Test coin not found in Export folder.");
+                        }
                         break;
                     case 5:
+                        System.out.println("5. Export 3 250-CloudCoin, csv");
                         denomination = 250;
                         sn = denominationToSN(denomination);
                         saveCloudCoin(makeCloudCoin(sn), sn, denomination);
                         saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
                         saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
                         saveCommand(makeCommand("750", "3", ""));
+
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin");
+                        if(Files.exists(Paths.get(RootPath + "Export\\" + (denomination * 3) + ".CloudCoin." + ".csv")) ){
+                            System.out.println("TEST 5 SUCCESS");
+                        }
+                        else{
+                            System.out.println("TEST 5 FAILED: Test coin not found in Export folder.");
+                        }
                         break;
+                        /*
                     case 6:
                         denomination = 1;
                         sn = denominationToSN(denomination);
@@ -143,10 +201,15 @@ public class Exporter {
                         }
                         saveCommand(makeCommand("100000", "1", ""));
                         break;
+                        */
                     default:
-                    case 0:
+                    case 6:
+                        System.out.println("All Tests Complete. Clearing out Folders used in testing.");
+                        TestUtils.FlushFolder("Bank");
+                        TestUtils.FlushFolder("Export");
                         return;
                 }
+                input++;
             } catch (Exception e) {
                 System.out.println("Uncaught exception - " + e.getLocalizedMessage());
                 e.printStackTrace();

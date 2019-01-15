@@ -109,6 +109,9 @@ public class Authenticator {
                         }
                         break;
                     case 5:
+                        System.out.println("All Tests Complete. Clearing out Folders used in testing.");
+                        TestUtils.FlushFolder("Detected");
+                        TestUtils.FlushFolder("Suspect");
                         return;
                 }
             } catch (Exception e) {
