@@ -55,6 +55,9 @@ public class Unpacker {
                         TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Unpacker-Java.jar\" C:\\CloudCoin");
                         if(Files.exists(Paths.get(RootPath+ "Suspect\\" + testfilename))){
 
+                            if(!Files.exists(Paths.get(RootPath + "Imported\\" + testfilename)))
+                                System.out.println("The unpacked coin is not in Imported folder. TEST FAILED.");
+                            else
                                 System.out.println("Test coin is unpacked. TEST SUCCESSFUL");
 
                         }else {
@@ -63,12 +66,15 @@ public class Unpacker {
                         break;
                     case 2:
                         System.out.println("2. Unpack CloudCoins (Multi Stack: 2)");
-                        TestUtils.saveFile(makeCloudCoinStack(2), 2, "Import", ".stack");
+                        String testfilename2 = TestUtils.saveFile(makeCloudCoinStack(2), 2, "Import", ".stack");
                         TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Unpacker-Java.jar\" C:\\CloudCoin");
                         if(Files.exists(Paths.get(RootPath+ "Suspect\\" + TestUtils.getDenomination(2) + ".CloudCoin.1." + 2 + ".stack"))
                         &&Files.exists(Paths.get(RootPath+ "Suspect\\" + TestUtils.getDenomination(102) + ".CloudCoin.1." + 102 + ".stack"))
                                 &&Files.exists(Paths.get(RootPath+ "Suspect\\" + TestUtils.getDenomination(202) + ".CloudCoin.1." + 202 + ".stack")))
                         {
+                            if(!Files.exists(Paths.get(RootPath + "Imported\\" + testfilename2)))
+                                System.out.println("The unpacked coin is not in Imported folder. TEST FAILED.");
+                            else
                             System.out.println("Test coin is unpacked. TEST SUCCESSFUL");
                         }else {
                             System.out.println("Couldn't find test coin in Suspect Folder. TEST FAILED");
@@ -76,10 +82,13 @@ public class Unpacker {
                         break;
                     case 3:
                         System.out.println("3. Unpack CloudCoin (JPG)");
-                        TestUtils.saveFile(makeCloudCoinJpg(), 1346931, "Import",".jpg");
+                        String testfilename3 = TestUtils.saveFile(makeCloudCoinJpg(), 1346931, "Import",".jpg");
                         TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Unpacker-Java.jar\" C:\\CloudCoin");
                         if(Files.exists(Paths.get(RootPath+ "Suspect\\" + "1.CloudCoin.1.1346931.stack"))){
 
+                            if(!Files.exists(Paths.get(RootPath + "Imported\\" + testfilename3)))
+                                System.out.println("The unpacked coin is not in Imported folder. TEST FAILED.");
+                            else
                             System.out.println("Test coin is unpacked. TEST SUCCESSFUL");
 
                         }else {
@@ -89,7 +98,7 @@ public class Unpacker {
                     case 4:
                         System.out.println("4. Unpack 4 CloudCoin files (one of each type)");
                         String testcoin1 = TestUtils.saveFile(makeCloudCoinSingle(4), 4, "Import",".stack");
-                        TestUtils.saveFile(makeCloudCoinStack(5), 5, "Import",".stack");
+                        String testfilename4 = TestUtils.saveFile(makeCloudCoinStack(5), 5, "Import",".stack");
                         //TestUtils.saveFile(makeCloudCoinJpg(), 6, "Import",".jpg");
                         TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Unpacker-Java.jar\" C:\\CloudCoin");
                         if(Files.exists(Paths.get(RootPath+ "Suspect\\" + testcoin1))
@@ -97,6 +106,9 @@ public class Unpacker {
                         &&Files.exists(Paths.get(RootPath+ "Suspect\\" +  TestUtils.getDenomination(105) + ".CloudCoin.1." + 105 + ".stack"))
                         &&Files.exists(Paths.get(RootPath+ "Suspect\\" +  TestUtils.getDenomination(205) + ".CloudCoin.1." + 205 + ".stack"))){
 
+                            if(!Files.exists(Paths.get(RootPath + "Imported\\" + testfilename4)) && !Files.exists(Paths.get(RootPath + "Imported\\" + testcoin1)))
+                                System.out.println("An unpacked coin is not in Imported folder. TEST FAILED.");
+                            else
                             System.out.println("Test coin is unpacked. TEST SUCCESSFUL");
 
                         }else {
