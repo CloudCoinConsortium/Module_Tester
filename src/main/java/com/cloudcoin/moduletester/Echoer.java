@@ -6,7 +6,7 @@ public class Echoer {
 
     public  Echoer(){
         try {
-            TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Echoer-Java.jar\" C:\\CloudCoin test");
+            TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Echoer-Java.jar\" C:\\CloudCoin\\");
             try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(Main.LogsPath + "Echoer\\")))
             {
                 for(Path p: stream)

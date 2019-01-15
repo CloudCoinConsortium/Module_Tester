@@ -85,7 +85,7 @@ public class Exporter {
                         saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
                         saveCommand(makeCommand("2", "0", ""));
 
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin\\");
                         if(Files.exists(Paths.get(RootPath + "Export\\" + denomination + ".CloudCoin."  + ".stack")) &&
                                 Files.exists(Paths.get(RootPath + "Export\\" + denomination + ".CloudCoin." + ".stack"))) {
                             System.out.println("TEST 1 SUCCESS");
@@ -102,7 +102,7 @@ public class Exporter {
                         saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
                         saveCommand(makeCommand("10", "1", ""));
 
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin\\");
                         if(Files.exists(Paths.get(RootPath + "Export\\" + (denomination * 2) + ".CloudCoin."  + ".stack"))) {
                             System.out.println("TEST 2 SUCCESS");
                         }
@@ -118,7 +118,7 @@ public class Exporter {
                         saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
                         saveCommand(makeCommand("50", "1", ""));
 
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin\\");
                         if(Files.exists(Paths.get(RootPath + "Export\\" + (denomination * 2) + ".CloudCoin." + ".stack")) ) {
                             System.out.println("TEST 3 SUCCESS");
                         }
@@ -133,7 +133,7 @@ public class Exporter {
                         saveCloudCoin(makeCloudCoin(sn), sn, denomination);
                         saveCommand(makeCommand("100", "2", ""));
 
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin\\");
                         if(Files.exists(Paths.get(RootPath + "Export\\" + denomination + ".CloudCoin."  + ".jpg")) ) {
                             System.out.println("TEST 4 SUCCESS");
                         }
@@ -150,7 +150,7 @@ public class Exporter {
                         saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
                         saveCommand(makeCommand("750", "3", ""));
 
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin\\");
                         if(Files.exists(Paths.get(RootPath + "Export\\" + (denomination * 3) + ".CloudCoin." + ".csv")) ){
                             System.out.println("TEST 5 SUCCESS");
                         }

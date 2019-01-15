@@ -62,7 +62,7 @@ public class Eraser {
                     case 1:
                         System.out.println("1. Erasing Logs Folder Contents");
                         TestUtils.saveDummyFile(LogsFolder);
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Eraser-Java.jar\" C:\\CloudCoin");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Eraser-Java.jar\" C:\\CloudCoin\\");
                         if(!Files.exists(Paths.get(LogsFolder + "TestDummyFile.txt"))) {
                             System.out.println("TEST 1 SUCCESS");
                         }
@@ -73,7 +73,7 @@ public class Eraser {
                     case 2:
                         System.out.println("2. Erasing Default Account Logs Folder Contents");
                         TestUtils.saveDummyFile(UserLogsFolder);
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Eraser-Java.jar\" C:\\CloudCoin");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Eraser-Java.jar\" C:\\CloudCoin\\");
                         if(!Files.exists(Paths.get(UserLogsFolder + "TestDummyFile.txt"))) {
                             System.out.println("TEST 2 SUCCESS");
                         }
@@ -84,7 +84,7 @@ public class Eraser {
                     case 3:
                         System.out.println("3. Erasing Receipts Folder Contents");
                         TestUtils.saveDummyFile(ReceiptsFolder);
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Eraser-Java.jar\" C:\\CloudCoin");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Eraser-Java.jar\" C:\\CloudCoin\\");
                         if(!Files.exists(Paths.get(ReceiptsFolder + "TestDummyFile.txt"))) {
                             System.out.println("TEST 3 SUCCESS");
                         }
@@ -95,7 +95,7 @@ public class Eraser {
                     case 4:
                         System.out.println("4. Erasing Default Account Receipts Folder Contents");
                         TestUtils.saveDummyFile(UserReceiptsFolder);
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Eraser-Java.jar\" C:\\CloudCoin");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Eraser-Java.jar\" C:\\CloudCoin\\");
                         if(!Files.exists(Paths.get(UserReceiptsFolder + "TestDummyFile.txt"))) {
                             System.out.println("TEST 4 SUCCESS");
                         }
@@ -106,7 +106,7 @@ public class Eraser {
                     case 5:
                         System.out.println("5. Erasing Command Folder Contents");
                         TestUtils.saveDummyFile(CommandsFolder);
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Eraser-Java.jar\" C:\\CloudCoin");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Eraser-Java.jar\" C:\\CloudCoin\\");
                         if(!Files.exists(Paths.get(CommandsFolder + "TestDummyFile.txt"))) {
                             System.out.println("TEST 5 SUCCESS");
                         }

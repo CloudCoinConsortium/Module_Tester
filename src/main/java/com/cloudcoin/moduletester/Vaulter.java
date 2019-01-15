@@ -58,7 +58,7 @@ public class Vaulter {
 
                         TestUtils.saveFile( makeCloudCoin(1) , 1, "Bank");
                         saveCommand(makeCommand(true));
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Vaulter-Java.jar\" C:\\CloudCoin");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Vaulter-Java.jar\" C:\\CloudCoin\\");
 
                         String[] inVaultFolder = TestUtils.selectFileNamesInFolder(RootPath + "Vault\\");
                         String[] inBankFolder = TestUtils.selectFileNamesInFolder(RootPath + "Bank\\");
@@ -76,7 +76,7 @@ public class Vaulter {
 
 
                         saveCommand(makeCommand(false));
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Vaulter-Java.jar\" C:\\CloudCoin");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Vaulter-Java.jar\" C:\\CloudCoin\\");
                         inBankFolder = TestUtils.selectFileNamesInFolder(RootPath + "Bank\\");
                         inVaultFolder = TestUtils.selectFileNamesInFolder(RootPath + "Vault\\");
                         if(inBankFolder.length > 0 && inVaultFolder.length == 0) {

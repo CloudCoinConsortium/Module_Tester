@@ -31,7 +31,7 @@ public class LossFixer {
 
             System.out.println("Starting LossFixer");
             //runProcess("javac -cp src \"C:\\Program Files\\CloudCoin\\Main.java\"");
-            TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-LossFixer-Java.jar\" C:\\CloudCoin test");
+            TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-LossFixer-Java.jar\" C:\\CloudCoin\\ test");
 
             System.out.println("Asserting that test CloudCoin has been fixed");
             String[] DetectedFileNames = TestUtils.selectFileNamesInFolder(Main.RootPath + "Detected" +File.separator);

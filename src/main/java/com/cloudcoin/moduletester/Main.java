@@ -33,7 +33,7 @@ public class Main {
     public static int getCommand(){
         //List all commands
         String commands[] = {"Quit Tester","Test Echoer","Test Exporter","test backuper","Test Pay-Forward","Test ShowCoins","Test Depositer","Test Minder",
-                "Test Emailer","Test Vaulter","Test LossFixer","Test Grader","Test Translator","Test Unpacker","Test Authenticator"};
+                "Test Eraser","Test Vaulter","Test LossFixer","Test Grader","Test Translator","Test Unpacker","Test Authenticator"};
 
         System.out.println("Enter the number of the command you wish to execute");
         for(int i= 0; i < commands.length; i++)

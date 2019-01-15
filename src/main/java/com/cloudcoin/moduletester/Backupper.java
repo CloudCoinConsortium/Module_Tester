@@ -69,7 +69,7 @@ private static String RootPath = "C:\\CloudCoin\\";
             saveCommand(makeCommand());
             //saveAccountFile(makePassword());
 
-            TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Backupper-Java.jar\" C:\\CloudCoin");
+            TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Backupper-Java.jar\" C:\\CloudCoin\\");
             String[] inBackupFolder = TestUtils.selectFileNamesInFolder(backupFolder);
             if(inBackupFolder.length > 0){
                 System.out.println("TEST SUCCESS");

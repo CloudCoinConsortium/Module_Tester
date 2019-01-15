@@ -57,7 +57,7 @@ public class Minder {
 
                         TestUtils.saveFile( makeCloudCoin(1) , 1, "Bank");
                         saveCommand(makeCommand(true));
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Minder-Java.jar\" C:\\CloudCoin");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Minder-Java.jar\" C:\\CloudCoin\\");
 
                         String[] inMindFolder = TestUtils.selectFileNamesInFolder(RootPath + "Mind\\");
                         String[] inBankFolder = TestUtils.selectFileNamesInFolder(RootPath + "Bank\\");
@@ -75,7 +75,7 @@ public class Minder {
 
 
                         saveCommand(makeCommand(false));
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Minder-Java.jar\" C:\\CloudCoin");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Minder-Java.jar\" C:\\CloudCoin\\");
                         inBankFolder = TestUtils.selectFileNamesInFolder(RootPath + "Bank\\");
                         inMindFolder = TestUtils.selectFileNamesInFolder(RootPath + "Mind\\");
                         if(inBankFolder.length > 0 && inMindFolder.length == 0) {

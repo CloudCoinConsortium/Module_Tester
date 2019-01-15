@@ -55,7 +55,7 @@ public class Authenticator {
                     case 1:
                         System.out.println("1. Authenticate 1 CloudCoin (Counterfeit)");
                         TestUtils.saveFile(makeCloudCoinCounterfeit(1), 1, "Suspect");
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Authenticator-Java.jar\" C:\\CloudCoin");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Authenticator-Java.jar\" C:\\CloudCoin\\");
                         if(Files.exists(Paths.get(RootPath + "Detected\\" + TestUtils.getDenomination(1) + ".CloudCoin.1." + 1 + ".stack"))) {
                             System.out.println("TEST 1 SUCCESS");
                         }
@@ -67,7 +67,7 @@ public class Authenticator {
                         System.out.println("2. Authenticate 10 CloudCoins (Counterfeit)");
                         for (int i = 0; i < 10; i++)
                             TestUtils.saveFile(makeCloudCoinCounterfeit(2 + i), 2 + i, "Suspect");
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Authenticator-Java.jar\" C:\\CloudCoin");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Authenticator-Java.jar\" C:\\CloudCoin\\");
                         for (int j = 0; j < 10; j++)
                             if(!Files.exists(Paths.get(RootPath + "Detected\\" + TestUtils.getDenomination(2 + j) + ".CloudCoin.1." + (2+j) + ".stack")))
                                 test2 = false;
@@ -82,7 +82,7 @@ public class Authenticator {
                         System.out.println("3. Authenticate 100 CloudCoins (Counterfeit)");
                         for (int i = 0; i < 100; i++)
                             TestUtils.saveFile(makeCloudCoinCounterfeit(100 + i), 100 + i, "Suspect");
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Authenticator-Java.jar\" C:\\CloudCoin");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Authenticator-Java.jar\" C:\\CloudCoin\\");
                         for (int j = 0; j < 100; j++)
                             if(!Files.exists(Paths.get(RootPath + "Detected\\" + TestUtils.getDenomination(100 + j) + ".CloudCoin.1." + (100+j) + ".stack")))
                                 test3 = false;
@@ -97,7 +97,7 @@ public class Authenticator {
                         System.out.println("4. Authenticate 400 CloudCoins (Counterfeit)");
                         for (int i = 0; i < 1000; i++)
                             TestUtils.saveFile(makeCloudCoinCounterfeit(1000 + i), 1000 + i, "Suspect");
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Authenticator-Java.jar\" C:\\CloudCoin");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Authenticator-Java.jar\" C:\\CloudCoin\\");
                         for (int j = 0; j < 1000; j++)
                             if(!Files.exists(Paths.get(RootPath + "Detected\\" + TestUtils.getDenomination(1000 + j) + ".CloudCoin.1." + (1000+j) + ".stack")))
                                 test4 = false;
