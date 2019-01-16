@@ -27,6 +27,8 @@ public class TestUtils {
     public static void FlushFolder(String folder) {
         try{
             Files.newDirectoryStream(Paths.get(Main.RootPath + folder + "\\")).forEach(file ->{
+                if(Files.isDirectory(file))
+                    FlushSpecificFolder(file.toString());
                 try{Files.deleteIfExists(file);}catch (IOException e){
                     System.out.println("Uncaught exception - " + e.getLocalizedMessage());
                     e.printStackTrace();
@@ -42,6 +44,8 @@ public class TestUtils {
     public static void FlushSpecificFolder(String folder) {
         try{
             Files.newDirectoryStream(Paths.get(folder + "\\")).forEach(file ->{
+                if(Files.isDirectory(file))
+                    FlushSpecificFolder(file.toString());
                 try{Files.deleteIfExists(file);}catch (IOException e){
                     System.out.println("Uncaught exception - " + e.getLocalizedMessage());
                     e.printStackTrace();

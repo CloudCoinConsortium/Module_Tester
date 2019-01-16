@@ -219,9 +219,9 @@ public class Exporter {
 
     public static void saveCloudCoin(byte[] cloudCoin, int sn, int denomination) throws IOException {
         String filename = ensureFilenameUnique(denomination + ".CloudCoin.1." + sn,
-                ".stack", RootPath + "Bank\\");
-        Files.createDirectories(Paths.get(RootPath + "Bank\\"));
-        Files.write(Paths.get(RootPath + "Bank\\" + filename), cloudCoin);
+                ".stack", DefaultPath + "Bank\\");
+        Files.createDirectories(Paths.get(DefaultPath + "Bank\\"));
+        Files.write(Paths.get(DefaultPath + "Bank\\" + filename), cloudCoin);
     }
 
     public static void saveCommand(byte[] command) throws IOException {
