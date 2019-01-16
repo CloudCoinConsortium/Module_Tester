@@ -44,7 +44,7 @@ public class Backupper {
 private static String RootPath = "C:\\CloudCoin\\";
     private static String DefaultPath = Main.RootPath;
 
-    public static String CommandFolder = RootPath + TAG_CLOUD_COIN + File.separator + TAG_COMMAND + File.separator;
+    public static String CommandFolder = RootPath +  TAG_COMMAND + File.separator;
     public static String LogsFolder = RootPath + TAG_LOGS + File.separator
             + TAG_BACKUPER + File.separator;
     public static String AccountFolder = RootPath  + TAG_ACCOUNTS
@@ -103,7 +103,7 @@ private static String RootPath = "C:\\CloudCoin\\";
         Files.write(Paths.get(AccountFolder + filename), command);
     }
     public static void saveCommand(byte[] command) throws IOException {
-        String filename = "backupper2018 Nov 21 01.46 14 AM.command";
+        String filename = "Backupper.backup.txt";
         Files.write(Paths.get(CommandFolder + filename), command);
     }
 

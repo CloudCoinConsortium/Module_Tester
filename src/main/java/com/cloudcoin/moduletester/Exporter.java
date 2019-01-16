@@ -40,12 +40,12 @@ public class Exporter {
         try {
             Files.createDirectories(Paths.get(DefaultPath));
             Files.createDirectories(Paths.get(CommandFolder));
-            Files.createDirectories(Paths.get(RootPath + "Detected\\"));
-            Files.createDirectories(Paths.get(RootPath + "Bank\\"));
-            Files.createDirectories(Paths.get(RootPath + "Fracked\\"));
-            Files.createDirectories(Paths.get(RootPath + "Counterfeit\\"));
-            Files.createDirectories(Paths.get(RootPath + "Lost\\"));
-            Files.createDirectories(Paths.get(RootPath + "Export\\"));
+            Files.createDirectories(Paths.get(DefaultPath + "Detected\\"));
+            Files.createDirectories(Paths.get(DefaultPath + "Bank\\"));
+            Files.createDirectories(Paths.get(DefaultPath + "Fracked\\"));
+            Files.createDirectories(Paths.get(DefaultPath + "Counterfeit\\"));
+            Files.createDirectories(Paths.get(DefaultPath + "Lost\\"));
+            Files.createDirectories(Paths.get(DefaultPath + "Export\\"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -225,8 +225,8 @@ public class Exporter {
     }
 
     public static void saveCommand(byte[] command) throws IOException {
-        String filename = ensureFilenameUnique("exporter" + LocalDateTime.now().format(timestampFormat),
-                "", CommandFolder);
+        String filename = ensureFilenameUnique("Exporter.Export"// + LocalDateTime.now().format(timestampFormat)
+                , ".txt", CommandFolder);
         Files.createDirectories(Paths.get(CommandFolder));
         Files.write(Paths.get(CommandFolder + filename), command);
     }
@@ -234,7 +234,7 @@ public class Exporter {
     public static byte[] makeCommand(String amount, String type, String tag) {
         return ("{\n" +
                 "      \"command\": \"exporter\",\n" +
-                "      \"account\": \"" + RootPath + "\",\n" +
+                "      \"account\": \"" + DefaultPath + "\",\n" +
                 "      \"amount\": " + amount + ",\n" +
                 "\t  \"type\": " + type + ",\n" +
                 "\t  \"tag\": \"" + tag + "\"\n" +
