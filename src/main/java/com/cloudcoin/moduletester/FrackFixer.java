@@ -21,7 +21,7 @@ public class FrackFixer {
 
             System.out.println("Starting FrackFixer");
             //runProcess("javac -cp src \"C:\\Program Files\\CloudCoin\\Main.java\"");
-            TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-FrackFixer-Java.jar\" C:\\CloudCoin\\ test");
+            TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-FrackFixer-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\");
 
             System.out.println("Asserting that test CloudCoin has been fixed");
             String[] BankFileNames = TestUtils.selectFileNamesInFolder(Main.RootPath + "Bank" + File.separator);
