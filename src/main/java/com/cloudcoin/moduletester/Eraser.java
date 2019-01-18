@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.CopyOption;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.Instant;
 
 public class Eraser {
     private static String RootPath = Main.RootPath;
@@ -17,7 +19,10 @@ public class Eraser {
     public Eraser() {
         createDirectories();
 
+        Instant start = Instant.now();
         ShowCommandLineOutput();
+        Instant end = Instant.now();
+        System.out.println("Five Tests,Time Elapsed: " + Duration.between(start, end).toMillis() + "ms");
     }
 
     public static void setRootPath(String[] args) {
@@ -64,7 +69,7 @@ public class Eraser {
                         System.out.println("1. Erasing Logs Folder Contents");
                         TestUtils.saveDummyFile(LogsFolder);
                         saveCommand(makeCommand());
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Eraser-Java.jar\" C:\\CloudCoin\\");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Eraser-Java.jar\" C:\\CloudCoin\\ singleRun");
                         if(!Files.exists(Paths.get(LogsFolder + "TestDummyFile.txt"))) {
                             System.out.println("TEST 1 SUCCESS");
                         }
@@ -76,7 +81,7 @@ public class Eraser {
                         System.out.println("2. Erasing Default Account Logs Folder Contents");
                         TestUtils.saveDummyFile(UserLogsFolder);
                         saveCommand(makeCommand());
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Eraser-Java.jar\" C:\\CloudCoin\\");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Eraser-Java.jar\" C:\\CloudCoin\\ singleRun");
                         if(!Files.exists(Paths.get(UserLogsFolder + "TestDummyFile.txt"))) {
                             System.out.println("TEST 2 SUCCESS");
                         }
@@ -88,7 +93,7 @@ public class Eraser {
                         System.out.println("3. Erasing Receipts Folder Contents");
                         TestUtils.saveDummyFile(ReceiptsFolder);
                         saveCommand(makeCommand());
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Eraser-Java.jar\" C:\\CloudCoin\\");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Eraser-Java.jar\" C:\\CloudCoin\\ singleRun");
                         if(!Files.exists(Paths.get(ReceiptsFolder + "TestDummyFile.txt"))) {
                             System.out.println("TEST 3 SUCCESS");
                         }
@@ -100,7 +105,7 @@ public class Eraser {
                         System.out.println("4. Erasing Default Account Receipts Folder Contents");
                         TestUtils.saveDummyFile(UserReceiptsFolder);
                         saveCommand(makeCommand());
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Eraser-Java.jar\" C:\\CloudCoin\\");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Eraser-Java.jar\" C:\\CloudCoin\\ singleRun");
                         if(!Files.exists(Paths.get(UserReceiptsFolder + "TestDummyFile.txt"))) {
                             System.out.println("TEST 4 SUCCESS");
                         }
@@ -112,7 +117,7 @@ public class Eraser {
                         System.out.println("5. Erasing Command Folder Contents");
                         TestUtils.saveDummyFile(CommandsFolder);
                         saveCommand(makeCommand());
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Eraser-Java.jar\" C:\\CloudCoin\\");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Eraser-Java.jar\" C:\\CloudCoin\\ singleRun");
                         if(!Files.exists(Paths.get(CommandsFolder + "TestDummyFile.txt"))) {
                             System.out.println("TEST 5 SUCCESS");
                         }

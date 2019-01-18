@@ -1,11 +1,23 @@
 package com.cloudcoin.moduletester;
 
+
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.Instant;
 
 public class LossFixer {
     public LossFixer(){
+
+        Instant start = Instant.now();
+        StartLossFixTest();
+        Instant end = Instant.now();
+        System.out.println("One Tests,Time Elapsed: " + Duration.between(start, end).toMillis() + "ms");
+    }
+
+    public static void StartLossFixTest(){
         try{
             System.out.println("Starting LostFixer Test");
 
@@ -31,7 +43,7 @@ public class LossFixer {
 
             System.out.println("Starting LossFixer");
             //runProcess("javac -cp src \"C:\\Program Files\\CloudCoin\\Main.java\"");
-            TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-LossFixer-Java.jar\" C:\\CloudCoin\\ test");
+            TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-LossFixer-Java.jar\" C:\\CloudCoin\\ singleRun");
 
             System.out.println("Asserting that test CloudCoin has been fixed");
             String[] DetectedFileNames = TestUtils.selectFileNamesInFolder(Main.RootPath + "Detected" +File.separator);

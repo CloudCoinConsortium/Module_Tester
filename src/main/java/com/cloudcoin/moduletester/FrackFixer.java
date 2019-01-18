@@ -3,10 +3,23 @@ package com.cloudcoin.moduletester;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.Instant;
 
 public class FrackFixer {
-    String TestCoinName = "100.CloudCoin.1.6377544..stack";
+    static String TestCoinName = "100.CloudCoin.1.6377544..stack";
     public FrackFixer(){
+
+
+
+        Instant start = Instant.now();
+        StartFrackFixTest();
+        Instant end = Instant.now();
+        System.out.println("One Tests,Time Elapsed: " + Duration.between(start, end).toMillis() + "ms");
+
+    }
+
+    public static void StartFrackFixTest(){
         try{
             System.out.println("Starting LostFixer Test");
 
@@ -21,7 +34,7 @@ public class FrackFixer {
 
             System.out.println("Starting FrackFixer");
             //runProcess("javac -cp src \"C:\\Program Files\\CloudCoin\\Main.java\"");
-            TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-FrackFixer-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\");
+            TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-FrackFixer-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\ singleRun");
 
             System.out.println("Asserting that test CloudCoin has been fixed");
             String[] BankFileNames = TestUtils.selectFileNamesInFolder(Main.RootPath + "Bank" + File.separator);

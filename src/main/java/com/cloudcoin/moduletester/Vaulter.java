@@ -3,6 +3,8 @@ package com.cloudcoin.moduletester;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 public class Vaulter {
@@ -13,7 +15,10 @@ public class Vaulter {
     public Vaulter() {
         createDirectories();
 
+        Instant start = Instant.now();
         ShowCommandLineOutput();
+        Instant end = Instant.now();
+        System.out.println("Two Tests,Time Elapsed: " + Duration.between(start, end).toMillis() + "ms");
     }
 
     public static void setRootPath(String[] args) {
@@ -58,7 +63,7 @@ public class Vaulter {
 
                         TestUtils.saveFile( makeCloudCoin(1) , 1, "Bank");
                         saveCommand(makeCommand(true));
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Vaulter-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Vaulter-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\ singleRun");
 
                         String[] inVaultFolder = TestUtils.selectFileNamesInFolder(RootPath + "Vault\\");
                         String[] inBankFolder = TestUtils.selectFileNamesInFolder(RootPath + "Bank\\");
@@ -76,7 +81,7 @@ public class Vaulter {
 
 
                         saveCommand(makeCommand(false));
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Vaulter-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Vaulter-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\ singleRun");
                         inBankFolder = TestUtils.selectFileNamesInFolder(RootPath + "Bank\\");
                         inVaultFolder = TestUtils.selectFileNamesInFolder(RootPath + "Vault\\");
                         if(inBankFolder.length > 0 && inVaultFolder.length == 0) {

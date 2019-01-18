@@ -3,6 +3,8 @@ package com.cloudcoin.moduletester;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Scanner;
 
 public class ShowCoins {
@@ -13,8 +15,11 @@ public class ShowCoins {
 
     public ShowCoins() {
         createDirectories();
-
+        Instant start = Instant.now();
         StartShowCoinsTest();
+        Instant end = Instant.now();
+        System.out.println("Four Tests,Time Elapsed: " + Duration.between(start, end).toMillis() + "ms");
+
     }
 
     public static void setRootPath(String[] args) {
@@ -50,7 +55,7 @@ public class ShowCoins {
                 TestUtils.FlushFolder("Lost");
                 TestUtils.FlushFolder("Fracked");
                         TestUtils.saveFile(makeCloudCoinCounterfeit(1), 1, "Bank");
-                TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-ShowCoins-Java.jar\" C:\\CloudCoin\\");
+                TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-ShowCoins-Java.jar\" C:\\CloudCoin\\ singleRun");
                 //assert
                 if(Files.exists(Paths.get(LogsPath + "Bank.1.1.0.0.0.0.txt")))
                     System.out.println("TEST 1 SUCCESSFUL");
@@ -63,7 +68,7 @@ public class ShowCoins {
                         for (int i = 0; i < 5; i++)
                             TestUtils.saveFile(makeCloudCoinCounterfeit(1 + i), 1 + i, "Fracked");
                         TestUtils.saveFile(makeCloudCoinCounterfeit(2097154), 2097154, "Fracked");
-                TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-ShowCoins-Java.jar\" C:\\CloudCoin\\");
+                TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-ShowCoins-Java.jar\" C:\\CloudCoin\\ singleRun");
                 //assert
                 if(Files.exists(Paths.get(LogsPath + "Fracked.10.5.1.0.0.0.txt")))
                     System.out.println("TEST 2 SUCCESSFUL");
@@ -74,7 +79,7 @@ public class ShowCoins {
 
 
                         TestUtils.saveFile(makeCloudCoinCounterfeit(6291458), 6291458, "Lost");
-                TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-ShowCoins-Java.jar\" C:\\CloudCoin\\");
+                TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-ShowCoins-Java.jar\" C:\\CloudCoin\\ singleRun");
                 //assert
                 if(Files.exists(Paths.get(LogsPath + "Lost.100.0.0.0.1.0.txt")))
                     System.out.println("TEST 3 SUCCESSFUL");
@@ -86,7 +91,7 @@ public class ShowCoins {
                         TestUtils.FlushFolder("Bank");
                         for (int i = 0; i < 4; i++)
                             TestUtils.saveFile(makeCloudCoinCounterfeit(14680066 + i), 14680066 + i, "Bank");
-                TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-ShowCoins-Java.jar\" C:\\CloudCoin\\");
+                TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-ShowCoins-Java.jar\" C:\\CloudCoin\\ singleRun");
                 //assert
                 if(Files.exists(Paths.get(LogsPath + "Bank.1000.0.0.0.0.4.txt")))
                     System.out.println("TEST 4 SUCCESSFUL");

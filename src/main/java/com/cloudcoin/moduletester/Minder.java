@@ -3,6 +3,8 @@ package com.cloudcoin.moduletester;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.Instant;
 
 public class Minder {
     private static String RootPath = Main.RootPath;
@@ -12,7 +14,10 @@ public class Minder {
     public Minder() {
         createDirectories();
 
+        Instant start = Instant.now();
         ShowCommandLineOutput();
+        Instant end = Instant.now();
+        System.out.println("Two Tests,Time Elapsed: " + Duration.between(start, end).toMillis() + "ms");
     }
 
     public static void setRootPath(String[] args) {
@@ -57,7 +62,7 @@ public class Minder {
 
                         TestUtils.saveFile( makeCloudCoin(1) , 1, "Bank");
                         saveCommand(makeCommand(true));
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Minder-Java.jar\" C:\\CloudCoin\\");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Minder-Java.jar\" C:\\CloudCoin\\ singleRun");
 
                         String[] inMindFolder = TestUtils.selectFileNamesInFolder(RootPath + "Mind\\");
                         String[] inBankFolder = TestUtils.selectFileNamesInFolder(RootPath + "Bank\\");
@@ -75,7 +80,7 @@ public class Minder {
 
 
                         saveCommand(makeCommand(false));
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Minder-Java.jar\" C:\\CloudCoin\\");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Minder-Java.jar\" C:\\CloudCoin\\ singleRun");
                         inBankFolder = TestUtils.selectFileNamesInFolder(RootPath + "Bank\\");
                         inMindFolder = TestUtils.selectFileNamesInFolder(RootPath + "Mind\\");
                         if(inBankFolder.length > 0 && inMindFolder.length == 0) {

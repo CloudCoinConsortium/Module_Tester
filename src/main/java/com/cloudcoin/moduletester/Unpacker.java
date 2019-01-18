@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Unpacker {
@@ -13,8 +16,11 @@ public class Unpacker {
 
     public Unpacker() {
         createDirectories();
-
+        Instant start = Instant.now();
         ShowCommandLineOutput();
+        Instant end = Instant.now();
+        System.out.println("Four Tests,Time Elapsed: " + Duration.between(start, end).toMillis() + "ms");
+
     }
 
     public static void setRootPath(String[] args) {
@@ -43,7 +49,7 @@ public class Unpacker {
         System.out.println("Emptying Import and Suspect Folder");
         TestUtils.FlushFolder("Import");
         TestUtils.FlushFolder("Suspect");
-        while (input < 9) {
+        while (input < 6) {
             try {
 
 
@@ -52,7 +58,7 @@ public class Unpacker {
                         System.out.println("1. Unpack CloudCoin (Single Stack)");
                         byte[] testcoin = makeCloudCoinSingle(1);
                         String testfilename = TestUtils.saveFile(testcoin, 1, "Import",  ".stack");
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Unpacker-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Unpacker-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\ singleRun");
                         if(Files.exists(Paths.get(RootPath+ "Suspect\\" + testfilename))){
 
                             if(!Files.exists(Paths.get(RootPath + "Imported\\" + testfilename)))
@@ -67,7 +73,7 @@ public class Unpacker {
                     case 2:
                         System.out.println("2. Unpack CloudCoins (Multi Stack: 2)");
                         String testfilename2 = TestUtils.saveFile(makeCloudCoinStack(2), 2, "Import", ".stack");
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Unpacker-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Unpacker-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\ singleRun");
                         if(Files.exists(Paths.get(RootPath+ "Suspect\\" + TestUtils.getDenomination(2) + ".CloudCoin.1." + 2 + ".stack"))
                         &&Files.exists(Paths.get(RootPath+ "Suspect\\" + TestUtils.getDenomination(102) + ".CloudCoin.1." + 102 + ".stack"))
                                 &&Files.exists(Paths.get(RootPath+ "Suspect\\" + TestUtils.getDenomination(202) + ".CloudCoin.1." + 202 + ".stack")))
@@ -83,7 +89,7 @@ public class Unpacker {
                     case 3:
                         System.out.println("3. Unpack CloudCoin (JPG)");
                         String testfilename3 = TestUtils.saveFile(makeCloudCoinJpg(), 1346931, "Import",".jpg");
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Unpacker-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Unpacker-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\ singleRun");
                         if(Files.exists(Paths.get(RootPath+ "Suspect\\" + "1.CloudCoin.1.1346931.stack"))){
 
                             if(!Files.exists(Paths.get(RootPath + "Imported\\" + testfilename3)))
@@ -100,7 +106,7 @@ public class Unpacker {
                         String testcoin1 = TestUtils.saveFile(makeCloudCoinSingle(4), 4, "Import",".stack");
                         String testfilename4 = TestUtils.saveFile(makeCloudCoinStack(5), 5, "Import",".stack");
                         //TestUtils.saveFile(makeCloudCoinJpg(), 6, "Import",".jpg");
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Unpacker-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Unpacker-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\ singleRun");
                         if(Files.exists(Paths.get(RootPath+ "Suspect\\" + testcoin1))
                         &&Files.exists(Paths.get(RootPath+ "Suspect\\" +  TestUtils.getDenomination(5) + ".CloudCoin.1." + 5 + ".stack"))
                         &&Files.exists(Paths.get(RootPath+ "Suspect\\" +  TestUtils.getDenomination(105) + ".CloudCoin.1." + 105 + ".stack"))
@@ -153,7 +159,7 @@ public class Unpacker {
                         }
                         break;
                         */
-                    case 8:
+                    case 5:
                         System.out.println("Finished Testing. Clearing out tested Folders.");
                         TestUtils.FlushFolder("Import");
                         TestUtils.FlushFolder("Suspect");
@@ -249,7 +255,7 @@ public class Unpacker {
                 "    },\n" +
                 "    {\n" +
                 "      \"nn\": 1,\n" +
-                "      \"sn\": " + sn + 100 + ",\n" +
+                "      \"sn\": " + (sn + 100) + ",\n" +
                 "      \"an\": [\n" +
                 "        \"00000000000000000000000000000000\",\n" +
                 "        \"00000000000000000000000000000000\",\n" +
@@ -283,7 +289,7 @@ public class Unpacker {
                 "    },\n" +
                 "    {\n" +
                 "      \"nn\": 1,\n" +
-                "      \"sn\": " + sn + 200 + ",\n" +
+                "      \"sn\": " + (sn + 200) + ",\n" +
                 "      \"an\": [\n" +
                 "        \"00000000000000000000000000000000\",\n" +
                 "        \"00000000000000000000000000000000\",\n" +

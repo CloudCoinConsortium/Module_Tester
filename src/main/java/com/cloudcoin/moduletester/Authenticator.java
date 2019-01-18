@@ -3,6 +3,8 @@ package com.cloudcoin.moduletester;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Scanner;
 
 public class Authenticator {
@@ -13,7 +15,10 @@ public class Authenticator {
     public Authenticator() {
         createDirectories();
 
+        Instant start = Instant.now();
         ShowCommandLineOutput();
+        Instant end = Instant.now();
+        System.out.println("Four Tests,Time Elapsed: " + Duration.between(start, end).toMillis() + "ms");
     }
 
     public static void setRootPath(String[] args) {
@@ -48,14 +53,14 @@ public class Authenticator {
         boolean test4 = true;
 
 
-        while (input < 5) {
+        while (input < 6) {
             try {
 
                 switch (input) {
                     case 1:
                         System.out.println("1. Authenticate 1 CloudCoin (Counterfeit)");
                         TestUtils.saveFile(makeCloudCoinCounterfeit(1), 1, "Suspect");
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Authenticator-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Authenticator-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\ singleRun");
                         if(Files.exists(Paths.get(RootPath + "Detected\\" + TestUtils.getDenomination(1) + ".CloudCoin.1." + 1 + ".stack"))) {
                             System.out.println("TEST 1 SUCCESS");
                         }
@@ -67,7 +72,7 @@ public class Authenticator {
                         System.out.println("2. Authenticate 10 CloudCoins (Counterfeit)");
                         for (int i = 0; i < 10; i++)
                             TestUtils.saveFile(makeCloudCoinCounterfeit(2 + i), 2 + i, "Suspect");
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Authenticator-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Authenticator-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\ singleRun");
                         for (int j = 0; j < 10; j++)
                             if(!Files.exists(Paths.get(RootPath + "Detected\\" + TestUtils.getDenomination(2 + j) + ".CloudCoin.1." + (2+j) + ".stack")))
                                 test2 = false;
@@ -82,7 +87,7 @@ public class Authenticator {
                         System.out.println("3. Authenticate 100 CloudCoins (Counterfeit)");
                         for (int i = 0; i < 100; i++)
                             TestUtils.saveFile(makeCloudCoinCounterfeit(100 + i), 100 + i, "Suspect");
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Authenticator-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Authenticator-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\ singleRun");
                         for (int j = 0; j < 100; j++)
                             if(!Files.exists(Paths.get(RootPath + "Detected\\" + TestUtils.getDenomination(100 + j) + ".CloudCoin.1." + (100+j) + ".stack")))
                                 test3 = false;
@@ -97,7 +102,7 @@ public class Authenticator {
                         System.out.println("4. Authenticate 400 CloudCoins (Counterfeit)");
                         for (int i = 0; i < 1000; i++)
                             TestUtils.saveFile(makeCloudCoinCounterfeit(1000 + i), 1000 + i, "Suspect");
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Authenticator-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\");
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Authenticator-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\ singleRun");
                         for (int j = 0; j < 1000; j++)
                             if(!Files.exists(Paths.get(RootPath + "Detected\\" + TestUtils.getDenomination(1000 + j) + ".CloudCoin.1." + (1000+j) + ".stack")))
                                 test4 = false;

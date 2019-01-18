@@ -11,6 +11,8 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -60,6 +62,17 @@ private static String RootPath = "C:\\CloudCoin\\";
 
     public Backupper() {
         createDirectories();
+
+
+        Instant start = Instant.now();
+        StartBackupperTest();
+        Instant end = Instant.now();
+        System.out.println("One Tests,Time Elapsed: " + Duration.between(start, end).toMillis() + "ms");
+
+
+    }
+
+    public static void StartBackupperTest(){
         try {
             System.out.println("Starting test for Backupper");
             System.out.println("Emptying Backup and Bank Folder");
@@ -69,7 +82,7 @@ private static String RootPath = "C:\\CloudCoin\\";
             saveCommand(makeCommand());
             //saveAccountFile(makePassword());
 
-            TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Backupper-Java.jar\" C:\\CloudCoin\\");
+            TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Backupper-Java.jar\" C:\\CloudCoin\\ singleRun");
             String[] inBackupFolder = TestUtils.selectFileNamesInFolder(backupFolder);
             if(inBackupFolder.length > 0){
                 System.out.println("TEST SUCCESS");
