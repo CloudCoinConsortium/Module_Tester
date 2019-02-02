@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 public class Vaulter {
     private static String RootPath = Main.RootPath;
-    public static String CommandFolder = "C:\\CloudCoin\\Command\\";
+    public static String CommandFolder = RootPath + "Command\\";
 
 
     public Vaulter() {
@@ -150,8 +150,8 @@ public class Vaulter {
     }
 
     public static void saveCommand(byte[] command) throws IOException {
-        String filename = TestUtils.ensureFilenameUnique("Vaulter.vault",
-                ".txt", CommandFolder);
+        String filename = TestUtils.ensureFilenameUnique("vaulter",
+                ".command", CommandFolder);
         Files.createDirectories(Paths.get(CommandFolder));
         Files.write(Paths.get(CommandFolder + filename), command);
     }
@@ -160,10 +160,10 @@ public class Vaulter {
         String command = send ? "toVault" : "fromVault";
 
         return ("{\n" +
-                "      \"command\": \""+command+"\",\n" +
-                "      \"account\": \"DefaultUser\",\n" +
-                "      \"passphrase\": \"test\",\n" +
-                "  \"cloudcoin\": \"1\",\n" +
+                "  \"command\": \""+command+"\",\n" +
+                "  \"account\": \"default\",\n" +
+                "  \"passphrase\": \"test\",\n" +
+                "  \"cloudcoin\": \"1\"\n" +
 
                 "}").getBytes();
     }

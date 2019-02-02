@@ -36,15 +36,15 @@ public class Echoer {
     }
 
     public static void saveCommand(byte[] command) throws IOException {
-        String filename = TestUtils.ensureFilenameUnique("Echoer.echo"// + LocalDateTime.now().format(timestampFormat)
-                , ".txt", CommandsFolder);
+        String filename = TestUtils.ensureFilenameUnique("echoer"// + LocalDateTime.now().format(timestampFormat)
+                , ".command", CommandsFolder);
         Files.createDirectories(Paths.get(CommandsFolder));
         Files.write(Paths.get(CommandsFolder + filename), command);
     }
 
     public static byte[] makeCommand() {
         return ("{\n" +
-                "      \"command\": \"echo\",\n" +
+                "  \"command\": \"echo\"\n" +
 
 
                 "}").getBytes();

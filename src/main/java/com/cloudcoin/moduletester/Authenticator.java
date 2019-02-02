@@ -18,7 +18,7 @@ public class Authenticator {
         Instant start = Instant.now();
         ShowCommandLineOutput();
         Instant end = Instant.now();
-        System.out.println("Four Tests,Time Elapsed: " + Duration.between(start, end).toMillis() + "ms");
+        System.out.println("Three Tests,Time Elapsed: " + Duration.between(start, end).toMillis() + "ms");
     }
 
     public static void setRootPath(String[] args) {
@@ -53,7 +53,7 @@ public class Authenticator {
         boolean test4 = true;
 
 
-        while (input < 6) {
+        while (input < 5) {
             try {
 
                 switch (input) {
@@ -98,6 +98,7 @@ public class Authenticator {
                             System.out.println("TEST 3 FAILED: a Test coin not found in Detected folder.");
                         }
                         break;
+                        /*
                     case 4:
                         System.out.println("4. Authenticate 400 CloudCoins (Counterfeit)");
                         for (int i = 0; i < 1000; i++)
@@ -113,10 +114,11 @@ public class Authenticator {
                             System.out.println("TEST 4 FAILED: a Test coin not found in Detected folder.");
                         }
                         break;
-                    case 5:
+                        */
+                    case 4:
                         System.out.println("All Tests Complete. Clearing out Folders used in testing.");
-                        TestUtils.FlushFolder("Detected");
-                        TestUtils.FlushFolder("Suspect");
+                        //TestUtils.FlushFolder("Detected");
+                        //TestUtils.FlushFolder("Suspect");
                         return;
                 }
             } catch (Exception e) {

@@ -10,7 +10,7 @@ package com.cloudcoin.moduletester;
 
 public class Main {
 
-    public static String RootPath = "C:\\CloudCoin\\accounts\\DefaultUser\\";
+    public static String RootPath = "C:\\CloudCoin\\Accounts\\DefaultUser\\";
     public static String LogsPath = "C:\\CloudCoin\\Logs\\";
     
     public static void main(String[] args) {

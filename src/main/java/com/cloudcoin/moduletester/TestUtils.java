@@ -25,22 +25,30 @@ public class TestUtils {
     }
 
     public static void FlushFolder(String folder) {
-        try{
-            Files.newDirectoryStream(Paths.get(Main.RootPath + folder + "\\")).forEach(file ->{
-                if(Files.isDirectory(file))
-                    FlushSpecificFolder(file.toString());
-                try{Files.deleteIfExists(file);}catch (IOException e){
-                    System.out.println("Uncaught exception - " + e.getLocalizedMessage());
-                    e.printStackTrace();
+
+        File file = new File(Main.RootPath +File.separator + folder);
+        try {
+            if (file == null || !file.exists())
+                return;
+
+            File[] listFiles = file.listFiles();
+            if (listFiles != null)
+                for (File childFile : listFiles) {
+                    if (childFile.isDirectory()) {
+                        FlushFolder(folder + File.separator + childFile.getName());
+                    }
+                        if (!childFile.delete()) {
+                            throw new IOException();
+                        }
+
                 }
-            });
         }
         catch(IOException e){
             System.out.println("Uncaught exception - " + e.getLocalizedMessage());
             e.printStackTrace();
         }
     }
-
+/*
     public static void FlushSpecificFolder(String folder) {
         try{
             Files.newDirectoryStream(Paths.get(folder + "\\")).forEach(file ->{
@@ -57,6 +65,7 @@ public class TestUtils {
             e.printStackTrace();
         }
     }
+    */
 
     public static String saveFile(byte[] cloudCoin, int sn, String folder) throws IOException {
         String filename = ensureFilenameUnique(getDenomination(sn) + ".CloudCoin.1." + sn ,".stack", Main.RootPath + folder + "\\");

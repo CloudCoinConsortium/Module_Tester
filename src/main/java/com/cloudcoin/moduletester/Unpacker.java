@@ -36,6 +36,7 @@ public class Unpacker {
         try {
             Files.createDirectories(Paths.get(RootPath));
             Files.createDirectories(Paths.get(RootPath + "Import\\"));
+            Files.createDirectories(Paths.get(RootPath + "Imported\\"));
             Files.createDirectories(Paths.get(RootPath + "Suspect\\"));
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,6 +49,7 @@ public class Unpacker {
         System.out.println("Starting test for Unpacker");
         System.out.println("Emptying Import and Suspect Folder");
         TestUtils.FlushFolder("Import");
+        TestUtils.FlushFolder("Imported");
         TestUtils.FlushFolder("Suspect");
         while (input < 6) {
             try {
@@ -162,6 +164,7 @@ public class Unpacker {
                     case 5:
                         System.out.println("Finished Testing. Clearing out tested Folders.");
                         TestUtils.FlushFolder("Import");
+                        TestUtils.FlushFolder("Imported");
                         TestUtils.FlushFolder("Suspect");
                         return;
                 }

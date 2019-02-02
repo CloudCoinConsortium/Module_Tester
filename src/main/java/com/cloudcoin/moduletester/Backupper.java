@@ -46,7 +46,7 @@ public class Backupper {
 private static String RootPath = "C:\\CloudCoin\\";
     private static String DefaultPath = Main.RootPath;
 
-    public static String CommandFolder = RootPath +  TAG_COMMAND + File.separator;
+    public static String CommandFolder = DefaultPath +  TAG_COMMAND + File.separator;
     public static String LogsFolder = RootPath + TAG_LOGS + File.separator
             + TAG_BACKUPER + File.separator;
     public static String AccountFolder = RootPath  + TAG_ACCOUNTS
@@ -79,11 +79,14 @@ private static String RootPath = "C:\\CloudCoin\\";
             TestUtils.FlushFolder("Bank");
             TestUtils.FlushFolder("Backup");
 
+            createDummyCoins();
+
             saveCommand(makeCommand());
             //saveAccountFile(makePassword());
 
-            TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Backupper-Java.jar\" C:\\CloudCoin\\ singleRun");
-            String[] inBackupFolder = TestUtils.selectFileNamesInFolder(backupFolder);
+            TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Backupper-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\ singleRun");
+            File[] backupDirectories = new File(backupFolder).listFiles();
+            String[] inBackupFolder = TestUtils.selectFileNamesInFolder(backupDirectories[0].getAbsolutePath());
             if(inBackupFolder.length > 0){
                 System.out.println("TEST SUCCESS");
             }
@@ -116,15 +119,15 @@ private static String RootPath = "C:\\CloudCoin\\";
         Files.write(Paths.get(AccountFolder + filename), command);
     }
     public static void saveCommand(byte[] command) throws IOException {
-        String filename = "Backupper.backup.txt";
+        String filename = "backup.command";
         Files.write(Paths.get(CommandFolder + filename), command);
     }
 
     public static byte[] makeCommand() {
         return ("{\n"
-                + "      \"command\": \"backupper\",\n"
-                + "      \"account\": \"1\",\n"
-                + "      \"toPath\": \"" + backupFolder + "\"\n"
+                + "  \"command\": \"backupper\",\n"
+                + "  \"account\": \"default\",\n"
+                + "  \"toPath\": \"C:\\\\CloudCoin\\\\Accounts\\\\DefaultUser\\\\Backup\"\n"
                 + "}").getBytes();
     }
     public static byte[] makePassword() {

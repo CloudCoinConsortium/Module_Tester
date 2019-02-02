@@ -17,7 +17,7 @@ public class Exporter {
 
 
     private static String PasswordFolder = RootPath + "accounts\\Passwords" + File.separator;
-    private static String CommandFolder = RootPath + "Command" + File.separator;
+    private static String CommandFolder = DefaultPath + "Command" + File.separator;
 
     private static final DateTimeFormatter timestampFormat = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
 
@@ -27,7 +27,7 @@ public class Exporter {
         Instant start = Instant.now();
         ShowCommandLineOutput();
         Instant end = Instant.now();
-        System.out.println("Five Tests,Time Elapsed: " + Duration.between(start, end).toMillis() + "ms");
+        System.out.println("Six Tests,Time Elapsed: " + Duration.between(start, end).toMillis() + "ms");
     }
 
     public static void setRootPath(String[] args) {
@@ -61,7 +61,7 @@ public class Exporter {
 
         int input = 1;
 
-        while (input < 7) {
+        while (input < 8) {
             try {
                 System.out.println();
 
@@ -90,9 +90,9 @@ public class Exporter {
                         saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
                         saveCommand(makeCommand("2", "0", ""));
 
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin\\ singleRun");
-                        if(Files.exists(Paths.get(RootPath + "Export\\" + denomination + ".CloudCoin."  + ".stack")) &&
-                                Files.exists(Paths.get(RootPath + "Export\\" + denomination + ".CloudCoin." + ".stack"))) {
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\ singleRun");
+                        if(Files.exists(Paths.get(DefaultPath + "Export\\" + denomination + ".CloudCoin.1." + --sn  + ".stack")) &&
+                                Files.exists(Paths.get(DefaultPath + "Export\\" + denomination + ".CloudCoin.1." + sn + ".stack"))) {
                             System.out.println("TEST 1 SUCCESS");
                         }
                         else{
@@ -107,8 +107,8 @@ public class Exporter {
                         saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
                         saveCommand(makeCommand("10", "1", ""));
 
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin\\ singleRun");
-                        if(Files.exists(Paths.get(RootPath + "Export\\" + (denomination * 2) + ".CloudCoin."  + ".stack"))) {
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\ singleRun");
+                        if(Files.exists(Paths.get(DefaultPath + "Export\\" + (denomination * 2) + ".CloudCoins"  + ".stack"))) {
                             System.out.println("TEST 2 SUCCESS");
                         }
                         else{
@@ -123,8 +123,8 @@ public class Exporter {
                         saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
                         saveCommand(makeCommand("50", "1", ""));
 
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin\\ singleRun");
-                        if(Files.exists(Paths.get(RootPath + "Export\\" + (denomination * 2) + ".CloudCoin." + ".stack")) ) {
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\ singleRun");
+                        if(Files.exists(Paths.get(DefaultPath + "Export\\" + (denomination * 2) + ".CloudCoins" + ".stack")) ) {
                             System.out.println("TEST 3 SUCCESS");
                         }
                         else{
@@ -138,8 +138,8 @@ public class Exporter {
                         saveCloudCoin(makeCloudCoin(sn), sn, denomination);
                         saveCommand(makeCommand("100", "2", ""));
 
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin\\ singleRun");
-                        if(Files.exists(Paths.get(RootPath + "Export\\" + denomination + ".CloudCoin."  + ".jpg")) ) {
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\ singleRun");
+                        if(Files.exists(Paths.get(DefaultPath + "Export\\" + denomination + ".CloudCoin.1."+ sn  + ".jpg")) ) {
                             System.out.println("TEST 4 SUCCESS");
                         }
                         else{
@@ -155,33 +155,39 @@ public class Exporter {
                         saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
                         saveCommand(makeCommand("750", "3", ""));
 
-                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin\\ singleRun");
-                        if(Files.exists(Paths.get(RootPath + "Export\\" + (denomination * 3) + ".CloudCoin." + ".csv")) ){
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\ singleRun");
+                        if(Files.exists(Paths.get(DefaultPath + "Export\\" + (denomination * 3) + ".CloudCoins" + ".csv")) ){
                             System.out.println("TEST 5 SUCCESS");
                         }
                         else{
                             System.out.println("TEST 5 FAILED: Test coin not found in Export folder.");
                         }
                         break;
-                        /*
+
                     case 6:
-                        denomination = 1;
-                        sn = denominationToSN(denomination);
-                        saveCloudCoin(makeCloudCoin(sn), sn, denomination);
-                        denomination = 5;
-                        sn = denominationToSN(denomination);
-                        saveCloudCoin(makeCloudCoin(sn), sn, denomination);
-                        denomination = 25;
-                        sn = denominationToSN(denomination);
-                        saveCloudCoin(makeCloudCoin(sn), sn, denomination);
+
                         denomination = 100;
                         sn = denominationToSN(denomination);
                         saveCloudCoin(makeCloudCoin(sn), sn, denomination);
-                        denomination = 250;
-                        sn = denominationToSN(denomination);
+                        saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
+                        saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
+                        saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
+                        saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
+                        int unusedDenomination = 250;
+                        sn = denominationToSN(unusedDenomination);
                         saveCloudCoin(makeCloudCoin(sn), sn, denomination);
-                        saveCommand(makeCommand("381", "1", ""));
+                        saveCloudCoin(makeCloudCoin(++sn), sn, denomination);
+                        saveCommand(makeCommandAlt("500", "1", "", 0, 0, 0, 5, 0));
+                        TestUtils.runProcess("java -jar \"C:\\Program Files\\CloudCoin\\CloudCore-Exporter-Java.jar\" C:\\CloudCoin\\Accounts\\DefaultUser\\ singleRun");
+                        if(Files.exists(Paths.get(DefaultPath + "Export\\" + (denomination * 5) + ".CloudCoins"  + ".stack"))) {
+                            System.out.println("TEST 6 SUCCESS");
+                        }
+                        else{
+                            System.out.println("TEST 6 FAILED: Test coin not found in Export folder.");
+                        }
                         break;
+
+                        /*
                     case 7:
                         denomination = 1;
                         sn = denominationToSN(denomination);
@@ -208,7 +214,7 @@ public class Exporter {
                         break;
                         */
                     default:
-                    case 6:
+                    case 7:
                         System.out.println("All Tests Complete. Clearing out Folders used in testing.");
                         TestUtils.FlushFolder("Bank");
                         TestUtils.FlushFolder("Export");
@@ -230,19 +236,34 @@ public class Exporter {
     }
 
     public static void saveCommand(byte[] command) throws IOException {
-        String filename = ensureFilenameUnique("Exporter.Export"// + LocalDateTime.now().format(timestampFormat)
-                , ".txt", CommandFolder);
+        String filename = ensureFilenameUnique("exporter"// + LocalDateTime.now().format(timestampFormat)
+                , ".command", CommandFolder);
         Files.createDirectories(Paths.get(CommandFolder));
         Files.write(Paths.get(CommandFolder + filename), command);
     }
 
     public static byte[] makeCommand(String amount, String type, String tag) {
         return ("{\n" +
-                "      \"command\": \"exporter\",\n" +
-                "      \"account\": \"" + DefaultPath + "\",\n" +
-                "      \"amount\": " + amount + ",\n" +
-                "\t  \"type\": " + type + ",\n" +
-                "\t  \"tag\": \"" + tag + "\"\n" +
+                "  \"command\": \"exporter\",\n" +
+                "  \"account\": \"default\",\n" +
+                "  \"amount\": " + amount + ",\n" +
+                "  \"type\": " + type + ",\n" +
+                "  \"tag\": \"" + tag + "\"\n" +
+                "}").getBytes();
+    }
+
+    public static byte[] makeCommandAlt(String amount, String type, String tag, int ones, int fives, int twentyfives, int hundreds, int twohundredfifties) {
+        return ("{\n" +
+                "  \"command\": \"exporter\",\n" +
+                "  \"account\": \"default\",\n" +
+                "  \"amount\": " + amount + ",\n" +
+                "  \"1s\": " + ones + ",\n" +
+                "  \"5s\": " + fives + ",\n" +
+                "  \"25s\": " + twentyfives + ",\n" +
+                "  \"100s\": " + hundreds + ",\n" +
+                "  \"250s\": " + twohundredfifties + ",\n" +
+                "  \"type\": " + type + ",\n" +
+                "  \"tag\": \"" + tag + "\"\n" +
                 "}").getBytes();
     }
 
